@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StatFormulaExperiments
+namespace RPGExperiments
 {
     public enum Element { None, Earth, Air, Fire, Water, Lightning, Ice, Nature, Light, Dark }
     public enum Target { Single, Either, Multi, Ally, Party, None }

@@ -15,7 +15,10 @@ namespace RPGExperiments
 
         static void printPhysicalAttack(BattleEntity attacker, BattleEntity defender, Random r)
         {
-            Console.WriteLine(attacker.Name + " does " + attacker.PhysicalAttackDamage(defender, r) + " damage to " + defender.Name + ".");
+            if (attacker.TryHit(defender, r))
+                Console.WriteLine(attacker.Name + " does " + attacker.PhysicalAttackDamage(defender, r) + " damage to " + defender.Name + ".");
+            else
+                Console.WriteLine(attacker.Name + " misses " + defender.Name);
         }
 
         static void printAttackSpell(BattleEntity attacker, BattleEntity defender, Random r) {
@@ -35,7 +38,7 @@ namespace RPGExperiments
         {
             byte spellLevel = 8;
             TestEntities.Aqua.AddSpell(TestSpells.HeavyCure, spellLevel);
-            TestEntities.Megumin.AddSpell(TestSpells.Ultima, spellLevel);
+            TestEntities.Megumin.AddSpell(TestSpells.Explosion, spellLevel);
             TestEntities.Yunyun.AddSpell(TestSpells.Eclipse, spellLevel);
             TestEntities.Yunyun.AddSpell(TestSpells.Frost, spellLevel);
             TestEntities.Yunyun.AddSpell(TestSpells.Hail, spellLevel);

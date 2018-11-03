@@ -8,26 +8,26 @@ namespace RPGExperiments
 {
     public static class TestWeapons
     {
-        public static MeleeWeapon MythrilShortsword = new MeleeWeapon(22, "Mythril Shortsword");
-        public static MeleeWeapon StaffOfRoses = new MeleeWeapon(13, "Staff of Roses");
-        public static MeleeWeapon CrimsonWoodRod = new MeleeWeapon(6, "Crimson Wood Rod");
-        public static MeleeWeapon SteelBroadsword = new MeleeWeapon(19, "Steel Broadsword");
+        public static Weapon MythrilShortsword = new Weapon(WeaponTypes.Sword, 22, "Mythril Shortsword");
+        public static Weapon StaffOfRoses = new Weapon(WeaponTypes.Staff, 13, "Staff of Roses");
+        public static Weapon CrimsonWoodRod = new Weapon(WeaponTypes.Rod, 6, "Crimson Wood Rod");
+        public static Weapon SteelBroadsword = new Weapon(WeaponTypes.Sword, 19, "Steel Broadsword");
 
-        public static MeleeWeapon CrystalDaggers = new MeleeWeapon(27, "Crystal Daggers");
-        public static MeleeWeapon CrimsonWand = new MeleeWeapon(11, "Crimson Black Rod");
-        public static MeleeWeapon KnifeOfSilence = new MeleeWeapon(21, "Knife of Silence");
+        public static Weapon CrystalDagger = new Weapon(WeaponTypes.Dagger, 27, "Crystal Dagger");
+        public static Weapon CrimsonWand = new Weapon(WeaponTypes.Rod, 11, "Crimson Wand");
+        public static Weapon KnifeOfSilence = new Weapon(WeaponTypes.Dagger, 21, "Knife of Silence");
 
-        public static MeleeWeapon AzureSword = new MeleeWeapon(23, "Azure Sword");
-        public static MeleeWeapon RedSword = new MeleeWeapon(22, "Red Sword");
-        public static MeleeWeapon DoubleBass = new MeleeWeapon(31, "Double Bass");
-        public static MeleeWeapon IronStaff = new MeleeWeapon(11, "Iron Staff");
+        public static Weapon AzureSword = new Weapon(WeaponTypes.Sword, 23, "Azure Sword");
+        public static Weapon RedSword = new Weapon(WeaponTypes.Sword, 22, "Red Sword");
+        public static Weapon DoubleBass = new Weapon(WeaponTypes.Club, 31, "Double Bass");
+        public static Weapon IronStaff = new Weapon(WeaponTypes.Staff, 11, "Iron Staff");
 
-        public static List<MeleeWeapon> Weapons = new List<MeleeWeapon> {MythrilShortsword, StaffOfRoses, CrimsonWoodRod, SteelBroadsword, CrystalDaggers, CrimsonWand, KnifeOfSilence, AzureSword, RedSword, DoubleBass, IronStaff};
+        public static List<Weapon> Weapons = new List<Weapon> { MythrilShortsword, StaffOfRoses, CrimsonWoodRod, SteelBroadsword, CrystalDagger, CrimsonWand, KnifeOfSilence, AzureSword, RedSword, DoubleBass, IronStaff };
     }
 
-    public class MeleeWeapon
+    public class Weapon
     {
-        /* Goes from 1 to 32. Represents attacking modifier for the weapon.
+        /* Goes from 1 to 32. Represents attacking modifier for the weapon based on quality.
          * 1-5: Barely qualifies as a weapon.
          * 6-10: Very basic starting equipment.
          * 11-15: Common weaponry available at most shops.
@@ -35,14 +35,18 @@ namespace RPGExperiments
          * 21-25: Rare and specialist/magical weapons, expensive to obtain.
          * 26-30: One-of-a-kind equipment, such as boss drops.
          * 31-32: A weapon imbued with sacred or legendary power. */
+        private WeaponType wType;
+        public WeaponType WType { get => wType; }
+
         private byte power;
         public byte Power { get => power; }
 
         private string name;
         public string Name { get => name; }
 
-        public MeleeWeapon(byte power_, string name_)
+        public Weapon(WeaponType type_, byte power_, string name_)
         {
+            wType = type_;
             power = power_;
             name = name_;
         }

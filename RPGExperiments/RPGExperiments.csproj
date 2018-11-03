@@ -48,6 +48,7 @@
     <Compile Include="Spell.cs" />
     <Compile Include="Utils.cs" />
     <Compile Include="Weapon.cs" />
+    <Compile Include="WeaponType.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

@@ -14,7 +14,7 @@ namespace RPGExperiments
         public static BattleEntity Megumin = new BattleEntity("Megumin", (byte)(levelBase + 5),     4,  3,  9,  14, 6,  9,  11, 12, TestWeapons.CrimsonWoodRod, TestArmour.CrimsonHat);
         public static BattleEntity Darkness = new BattleEntity("Darkness", (byte)(levelBase + 5),   13, 14, 2,  5,  9,  12, 5,  7,  TestWeapons.SteelBroadsword, TestArmour.CrusaderHeavy);
 
-        public static BattleEntity Wiz = new BattleEntity("Wiz", (byte)(levelBase + 8),             10, 10, 5,  6,  12, 10, 9,  4,  TestWeapons.CrystalDaggers, TestArmour.PurpleRobes);
+        public static BattleEntity Wiz = new BattleEntity("Wiz", (byte)(levelBase + 8),             10, 10, 5,  6,  12, 10, 9,  4,  TestWeapons.CrystalDagger, TestArmour.PurpleRobes);
         public static BattleEntity Yunyun = new BattleEntity("Yunyun", (byte)(levelBase + 2),       9,  7,  5,  14, 8,  11, 5,  7,  TestWeapons.CrimsonWand, TestArmour.CrimsonUniform);
         public static BattleEntity Chris = new BattleEntity("Chris", (byte)(levelBase + 2),         6,  5,  14, 9,  7,  4,  16, 9,  TestWeapons.KnifeOfSilence, TestArmour.ThiefSuit);
         
@@ -35,8 +35,8 @@ namespace RPGExperiments
         private string name;
         public string Name { get => name; }
 
-        private MeleeWeapon weapon;
-        public MeleeWeapon Weapon { get => weapon; }
+        private Weapon weapon;
+        public Weapon Weapon { get => weapon; }
 
         private ArmourPiece armour;
         public ArmourPiece Armour { get => armour; }
@@ -75,18 +75,28 @@ namespace RPGExperiments
 
         public ushort MaxHealth { get => (ushort)Utils.Clamp((12 + baseVit) * level * 6 + baseLck * Math.Log(level), 1, 9999); }
         public ushort MaxMana { get => (ushort)Utils.Clamp(((baseInt + baseSpt + baseRes) * 2 / 3) * level / 1.5 + baseLck * Math.Log(level), 1, 999); }
-        public ushort PhysAtk { get => (ushort)Utils.Clamp((level * (baseStr + 8)) / 2 + (level * weapon.Power / 4), 1, 999); }
+        public ushort PhysAtk { get => (ushort)Utils.Clamp((level * (baseStr + 8)) / 2 + (level * weapon.WType.pow * weapon.Power / 4), 1, 999); }
         public ushort PhysDef { get => (ushort)Utils.Clamp((level * (baseVit + 8)) / 2 + (level * armour.Protection / 4), 1, 999); }
         public ushort BlackMag { get => (ushort)Utils.Clamp((level * (baseInt * 1.5 + baseChr / 2) / 1.5), 1, 999); }
         public ushort WhiteMag { get => (ushort)Utils.Clamp((level * (baseSpt * 1.5 + baseChr / 2) / 1.5), 1, 999); }
         public ushort MagDef { get => (ushort)Utils.Clamp((level * ((baseRes * 1.5) + (baseInt + baseSpt) / 4) / 1.5), 1, 999); }
-        public byte HitRate { get => (byte)Utils.Clamp(1.5 * Math.Sqrt((Math.Log(level) + 1) * (8 + baseAgl + baseLck) * 100), 1, 255); }
+        public byte HitRate { get => (byte)Utils.Clamp(1.5 * Math.Sqrt((Math.Log(level) + 1) * (8 + baseAgl + baseLck) * 125), 1, 255); }
         public byte Speed { get => (byte)Utils.Clamp(1.5 * Math.Sqrt((Math.Log(level) + 1) * (baseAgl + 8) * 200), 1, 255); }
         public byte Charm { get => (byte)Utils.Clamp(1.5 * Math.Sqrt(((Math.Log(level) + 1) * (baseChr + 8)) * 200 + baseLck), 1, 255); }
 
+        public bool TryHit(BattleEntity defender, Random r)
+        {
+            return (r.Next((int)(HitRate * weapon.WType.hit)) < defender.Speed);
+        }
+
         public ushort PhysicalAttackDamage(BattleEntity defender, Random r)
         {
-            return (ushort)Utils.Clamp(PhysAtk * 3 - defender.PhysDef + r.Next(1, (ushort)(3 + Math.Log(level) * baseLck)), 1, 9999);
+            ushort damage = (ushort)Utils.Clamp(PhysAtk * 3 - defender.PhysDef + r.Next(1, (ushort)(3 + Math.Log(level) * baseLck)), 1, 9999);
+
+            if (r.NextDouble() < weapon.WType.crit)
+                return (ushort)(damage * 2);
+            else
+                return damage;
         }
 
         public ushort SpellAttackDamage(BattleEntity defender, Random r, AttackSpell spell, byte level)
@@ -117,7 +127,7 @@ namespace RPGExperiments
             return (ushort)Utils.Clamp(rawHeal, 1, 9999);
         }
 
-        public BattleEntity(string name_, byte level_, byte str_, byte vit_, byte agl_, byte int_, byte spt_, byte res_, byte lck_, byte chr_, MeleeWeapon weapon_, ArmourPiece armour_)
+        public BattleEntity(string name_, byte level_, byte str_, byte vit_, byte agl_, byte int_, byte spt_, byte res_, byte lck_, byte chr_, Weapon weapon_, ArmourPiece armour_)
         {
             level = level_;
             name = name_;

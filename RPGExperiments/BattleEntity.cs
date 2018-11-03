@@ -23,7 +23,7 @@ namespace RPGExperiments
         public static BattleEntity Freddie = new BattleEntity("Freddie", (byte)(levelBase + 1),     9,  11, 8,  5,  6,  10, 12, 7,  TestWeapons.DoubleBass, TestArmour.NiceSuit);
         public static BattleEntity James = new BattleEntity("James", (byte)(levelBase + 1),         6,  8,  11, 7,  12, 9,  6,  9,  TestWeapons.IronStaff, TestArmour.WhiteRobes);
 
-        public static List<BattleEntity> Entities = new List<BattleEntity>() {Kazuma, Aqua, Megumin, Darkness, Wiz, Yunyun, Chris, Sam, Lewis, Freddie, James};
+        public static List<BattleEntity> Entities = new List<BattleEntity>() { Kazuma, Aqua, Megumin, Darkness, Wiz, Yunyun, Chris, Sam, Lewis, Freddie, James };
     }
 
     public class BattleEntity
@@ -81,20 +81,23 @@ namespace RPGExperiments
         public ushort WhiteMag { get => (ushort)Utils.Clamp((level * (baseSpt * 1.5 + baseChr / 2) / 1.5), 1, 999); }
         public ushort MagDef { get => (ushort)Utils.Clamp((level * ((baseRes * 1.5) + (baseInt + baseSpt) / 4) / 1.5), 1, 999); }
         public byte HitRate { get => (byte)Utils.Clamp(1.5 * Math.Sqrt((Math.Log(level) + 1) * (8 + baseAgl + baseLck) * 125), 1, 255); }
-        public byte Speed { get => (byte)Utils.Clamp(1.5 * Math.Sqrt((Math.Log(level) + 1) * (baseAgl + 8) * 200), 1, 255); }
+        public byte Speed { get => (byte)Utils.Clamp(1.5 * Math.Sqrt((Math.Log(level) + 1) * (baseAgl + 8) * 200 + 2 * baseStr), 1, 255); }
         public byte Charm { get => (byte)Utils.Clamp(1.5 * Math.Sqrt(((Math.Log(level) + 1) * (baseChr + 8)) * 200 + baseLck), 1, 255); }
-
-        public bool TryHit(BattleEntity defender, Random r)
-        {
-            return (r.Next((int)(HitRate * weapon.WType.hit)) < defender.Speed);
-        }
 
         public ushort PhysicalAttackDamage(BattleEntity defender, Random r)
         {
             ushort damage = (ushort)Utils.Clamp(PhysAtk * 3 - defender.PhysDef + r.Next(1, (ushort)(3 + Math.Log(level) * baseLck)), 1, 9999);
 
             if (r.NextDouble() < weapon.WType.crit)
+            {
+                Console.WriteLine("Critical!");
                 return (ushort)(damage * 2);
+            }
+            else if (r.Next((int)(defender.Speed)) > HitRate * weapon.WType.hit)
+            {
+                Console.WriteLine("Glancing...");
+                return (ushort)(damage / 2);
+            }
             else
                 return damage;
         }

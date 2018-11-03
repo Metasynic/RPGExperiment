@@ -15,10 +15,7 @@ namespace RPGExperiments
 
         static void printPhysicalAttack(BattleEntity attacker, BattleEntity defender, Random r)
         {
-            if (attacker.TryHit(defender, r))
-                Console.WriteLine(attacker.Name + " does " + attacker.PhysicalAttackDamage(defender, r) + " damage to " + defender.Name + ".");
-            else
-                Console.WriteLine(attacker.Name + " misses " + defender.Name);
+            Console.WriteLine(attacker.Name + " does " + attacker.PhysicalAttackDamage(defender, r) + " damage to " + defender.Name + ".");
         }
 
         static void printAttackSpell(BattleEntity attacker, BattleEntity defender, Random r) {
@@ -53,7 +50,7 @@ namespace RPGExperiments
             }
 
             Random r = new Random();
-            for(int i = 0; i < 5; i++)
+            for(int i = 0; i < 10; i++)
             {
                 printPhysicalAttack(TestEntities.Entities[r.Next(0, TestEntities.Entities.Count)], TestEntities.Entities[r.Next(0, TestEntities.Entities.Count)], r);
             }

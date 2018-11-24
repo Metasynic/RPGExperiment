@@ -17,8 +17,8 @@ namespace RPGExperiments
         public static Weapon CrimsonWand = new Weapon(WeaponTypes.Rod, 11, "Crimson Wand");
         public static Weapon KnifeOfSilence = new Weapon(WeaponTypes.Dagger, 21, "Knife of Silence");
 
-        public static Weapon AzureSword = new Weapon(WeaponTypes.Sword, 23, "Azure Sword");
-        public static Weapon RedSword = new Weapon(WeaponTypes.Sword, 22, "Red Sword");
+        public static Weapon AzureSword = new Weapon(WeaponTypes.Sword, 16, "Azure Sword");
+        public static Weapon RedSword = new Weapon(WeaponTypes.Sword, 18, "Red Sword");
         public static Weapon DoubleBass = new Weapon(WeaponTypes.Club, 31, "Double Bass");
         public static Weapon IronStaff = new Weapon(WeaponTypes.Staff, 11, "Iron Staff");
 

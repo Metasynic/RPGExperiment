@@ -18,31 +18,25 @@ namespace RPGExperiments
             Console.WriteLine(attacker.Name + " does " + attacker.PhysicalAttackDamage(defender, r) + " damage to " + defender.Name + ".");
         }
 
-        static void printAttackSpell(BattleEntity attacker, BattleEntity defender, Random r) {
+        static void printSpell(BattleEntity attacker, BattleEntity defender, Random r) {
             Spell spell = attacker.Spells.Keys.ElementAt(r.Next(0, attacker.Spells.Keys.Count));
             byte level = attacker.Spells[spell];
-            Console.WriteLine(attacker.Name + " cast " + spell.Name + " on " + defender.Name + " for " + attacker.SpellAttackDamage(defender, r, (AttackSpell)spell, level));
-        }
-
-        static void printHealSpell(BattleEntity attacker, BattleEntity defender, Random r)
-        {
-            Spell spell = attacker.Spells.Keys.ElementAt(r.Next(0, attacker.Spells.Keys.Count));
-            byte level = attacker.Spells[spell];
-            Console.WriteLine(attacker.Name + " cast " + spell.Name + " on " + defender.Name + " healing " + attacker.SpellHealAmount(defender, r, (HealSpell)spell, level));
+            if (spell.GetType() == typeof(AttackSpell)) {
+                Console.WriteLine(attacker.Name + " cast " + spell.Name + " on " + defender.Name + " for " + attacker.SpellAttackDamage(defender, r, (AttackSpell)spell, level));
+            }
+            else if (spell.GetType() == typeof(HealSpell)) {
+                Console.WriteLine(attacker.Name + " cast " + spell.Name + " on " + defender.Name + " healing " + attacker.SpellHealAmount(defender, r, (HealSpell)spell, level));
+            }
         }
 
         static void Main(string[] args)
         {
             byte spellLevel = 8;
-            TestEntities.Aqua.AddSpell(TestSpells.HeavyCure, spellLevel);
+            TestEntities.Aqua.AddSpells(TestSpells.WhiteMageSet, spellLevel);
             TestEntities.Megumin.AddSpell(TestSpells.Explosion, spellLevel);
-            TestEntities.Yunyun.AddSpell(TestSpells.Eclipse, spellLevel);
-            TestEntities.Yunyun.AddSpell(TestSpells.Frost, spellLevel);
-            TestEntities.Yunyun.AddSpell(TestSpells.Hail, spellLevel);
-            TestEntities.Yunyun.AddSpell(TestSpells.Blizzard, spellLevel);
-            TestEntities.Yunyun.AddSpell(TestSpells.Avalanche, spellLevel);
-            TestEntities.Sam.AddSpell(TestSpells.ChargeField, spellLevel);
-            TestEntities.Sam.AddSpell(TestSpells.ShadowCore, spellLevel);
+            TestEntities.Yunyun.AddSpells(TestSpells.BlackMageSet, spellLevel);
+            TestEntities.Sam.AddSpells(TestSpells.BlueMageSet, spellLevel);
+            TestEntities.Lewis.AddSpells(TestSpells.RedMageSet, spellLevel);
 
             foreach (BattleEntity entity in TestEntities.Entities)
             {
@@ -55,10 +49,11 @@ namespace RPGExperiments
                 printPhysicalAttack(TestEntities.Entities[r.Next(0, TestEntities.Entities.Count)], TestEntities.Entities[r.Next(0, TestEntities.Entities.Count)], r);
             }
 
-            printHealSpell(TestEntities.Aqua, TestEntities.Chris, r);
-            printAttackSpell(TestEntities.Megumin, TestEntities.Kazuma, r);
-            printAttackSpell(TestEntities.Sam, TestEntities.Darkness, r);
-            printAttackSpell(TestEntities.Yunyun, TestEntities.Wiz, r);
+            printSpell(TestEntities.Aqua, TestEntities.Chris, r);
+            printSpell(TestEntities.Megumin, TestEntities.Kazuma, r);
+            printSpell(TestEntities.Sam, TestEntities.Darkness, r);
+            printSpell(TestEntities.Yunyun, TestEntities.Wiz, r);
+            printSpell(TestEntities.Lewis, TestEntities.Sam, r);
 
             Console.ReadKey();
         }

@@ -13,8 +13,12 @@ namespace RPGExperiments
     {
         // Stand-alone specialist spells
         public static readonly AttackSpell Explosion = new AttackSpell("Explosion", Target.Multi, true, Element.None, 6.0, 200);
+        public static readonly AttackSpell Blast = new AttackSpell("Blast", Target.Multi, true, Element.None, 3.5, 110);
         public static readonly AttackSpell Lumina = new AttackSpell("Lumina", Target.EitherEnemy, false, Element.Light, 5.8, 185);
         public static readonly AttackSpell Eclipse = new AttackSpell("Eclipse", Target.EitherEnemy, true, Element.Dark, 5.8, 185);
+        public static readonly AttackSpell Aura = new AttackSpell("Aura", Target.EitherEnemy, false, Element.Light, 2.5, 80);
+        public static readonly AttackSpell Shadow = new AttackSpell("Shadow", Target.EitherEnemy, true, Element.Dark, 2.5, 80);
+
 
         // Basic elemental spells
         public static readonly AttackSpell Frost = new AttackSpell("Frost", Target.EitherEnemy, true, Element.Ice, 1.0, 30);
@@ -78,8 +82,8 @@ namespace RPGExperiments
         public static readonly AttackSpell Starfall = new AttackSpell("Starfall", Target.Multi, true, Element.None, 8.0, 200, false, true);
         public static readonly AttackSpell Nova = new AttackSpell("Nova", Target.Multi, true, Element.None, 16.0, 500, false, true);
 
-        // Spell lists
-        public static readonly List<AttackSpell> Specialist = new List<AttackSpell> { Explosion, Lumina, Eclipse };
+        // Spell lists (by category)
+        public static readonly List<AttackSpell> Specialist = new List<AttackSpell> { Explosion, Blast, Lumina, Eclipse, Aura, Shadow };
         public static readonly List<AttackSpell> BasicElem = new List<AttackSpell> { Frost, Flame, Gust, Bolt, Wave, Rockfall, Sprout };
         public static readonly List<AttackSpell> IntElem = new List<AttackSpell> { Hail, Blaze, Gale, Discharge, Downpour, Boulder, Growth };
         public static readonly List<AttackSpell> AdvElem = new List<AttackSpell> { Blizzard, Inferno, Tornado, Surge, Flood, Landslide, Emergence };
@@ -88,6 +92,21 @@ namespace RPGExperiments
         public static readonly List<AttackSpell> SingleElemBlue = new List<AttackSpell> { Torch, Radiance, Blossom, Geode, ShadowCore };
         public static readonly List<AttackSpell> MultiElemBlue = new List<AttackSpell> { Waterfall, ChargeField, FuryWind, Glacier, ChaosFold };
         public static readonly List<AttackSpell> Cosmic = new List<AttackSpell> { Comet, Meteor, Starfall, Nova };
+
+        // Spell lists (by class)
+        public static readonly List<Spell> BlackMageSet = new List<Spell> { Explosion, Eclipse, Shadow,
+            Frost, Flame, Gust, Bolt, Wave, Rockfall, Sprout,
+            Hail, Blaze, Gale, Discharge, Downpour, Boulder, Growth,
+            Blizzard, Inferno, Tornado, Surge, Flood, Landslide, Emergence,
+            Avalanche, Flare, Hurricane, Storm, Tsunami, Earthquake, Awakening };
+        public static readonly List<Spell> WhiteMageSet = new List<Spell> {Lumina, Aura,
+            LightCure, MediumCure, HeavyCure, UltimateCure };
+        public static readonly List<Spell> RedMageSet = new List<Spell> {Blast,
+            Frost, Flame, Gust, Bolt, Wave, Rockfall, Sprout,
+            Hail, Blaze, Gale, Discharge, Downpour, Boulder, Growth };
+        public static readonly List<Spell> BlueMageSet = new List<Spell> { 
+            Torch, Radiance, Blossom, Geode, ShadowCore,
+            Waterfall, ChargeField, FuryWind, Glacier, ChaosFold };
     }
 
     public class Spell

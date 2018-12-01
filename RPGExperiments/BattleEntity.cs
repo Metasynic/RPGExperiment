@@ -8,6 +8,7 @@ namespace RPGExperiments
 {
     public static class TestEntities
     {
+        /* Player base stats should sum to between 65 and 69. */
         static byte levelBase = 50;                                                              /* STR VIT AGL INT SPR RES LCK CHR */
         public static BattleEntity Kazuma = new BattleEntity("Kazuma", (byte)(levelBase + 4),       6,  7,  13, 9,  4,  9,  14, 6,  TestWeapons.MythrilShortsword, TestArmour.ThiefCape);
         public static BattleEntity Aqua = new BattleEntity("Aqua", (byte)(levelBase + 4),           7,  8,  6,  4,  16, 13, 1,  14, TestWeapons.StaffOfRoses, TestArmour.GoddessSuit);
@@ -16,7 +17,7 @@ namespace RPGExperiments
 
         public static BattleEntity Wiz = new BattleEntity("Wiz", (byte)(levelBase + 8),             10, 10, 5,  6,  12, 7,  9,  7,  TestWeapons.CrystalDagger, TestArmour.PurpleRobes);
         public static BattleEntity Yunyun = new BattleEntity("Yunyun", (byte)(levelBase + 2),       9,  7,  6,  14, 8,  10, 5,  7,  TestWeapons.CrimsonWand, TestArmour.CrimsonUniform);
-        public static BattleEntity Chris = new BattleEntity("Chris", (byte)(levelBase + 2),         6,  5,  14, 9,  6,  5,  16, 9,  TestWeapons.KnifeOfSilence, TestArmour.ThiefSuit);
+        public static BattleEntity Chris = new BattleEntity("Chris", (byte)(levelBase + 2),         6,  5,  14, 9,  6,  5,  16, 8,  TestWeapons.KnifeOfSilence, TestArmour.ThiefSuit);
         
         public static BattleEntity Sam = new BattleEntity("Sam", (byte)(levelBase + 1),             7,  6,  9,  12, 10, 11, 6,  7,  TestWeapons.AzureSword, TestArmour.AzureCloak);
         public static BattleEntity Lewis = new BattleEntity("Lewis", (byte)(levelBase + 1),         9,  7,  7,  10, 12, 10, 4,  9,  TestWeapons.RedSword, TestArmour.SteelLight);
@@ -93,7 +94,7 @@ namespace RPGExperiments
                 Console.WriteLine("Critical!");
                 return (ushort)(damage * 2);
             }
-            else if (r.Next((int)(defender.Speed)) > HitRate * weapon.WType.hit)
+            else if (r.Next(defender.Speed) > HitRate * weapon.WType.hit)
             {
                 Console.WriteLine("Glancing...");
                 return (ushort)(damage / 2);

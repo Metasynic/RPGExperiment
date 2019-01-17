@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RPGExperiments
+namespace RPGExperiments.Weapons
 {
     public static class WeaponTypes
     {

@@ -19,8 +19,8 @@ namespace RPGExperiments
         public static BattleEntity Wiz = new BattleEntity("Wiz", (byte)(levelBase + 8),             10, 10, 5,  6,  12, 7,  9,  7,  TestPhysWeapons.CrystalDagger, TestArmour.PurpleRobes);
         public static BattleEntity Yunyun = new BattleEntity("Yunyun", (byte)(levelBase + 2),       9,  7,  6,  14, 8,  10, 5,  7,  TestMagWeapons.CrimsonWand, TestArmour.CrimsonUniform);
         public static BattleEntity Chris = new BattleEntity("Chris", (byte)(levelBase + 2),         6,  5,  14, 9,  6,  5,  16, 8,  TestPhysWeapons.KnifeOfSilence, TestArmour.ThiefSuit);
-        
-        public static BattleEntity Sam = new BattleEntity("Sam", (byte)(levelBase + 1),             7,  6,  9,  12, 10, 11, 6,  7,  TestPhysWeapons.AzureSword, TestArmour.AzureCloak);
+
+        public static BattleEntity Sam = new BattleEntity("Sam", (byte)(levelBase + 1),             7,  6,  9,  12, 10, 11, 6,  7,  TestMagWeapons.AzureStaff, TestArmour.AzureCloak);
         public static BattleEntity Lewis = new BattleEntity("Lewis", (byte)(levelBase + 1),         9,  7,  7,  10, 12, 10, 4,  9,  TestPhysWeapons.RedSword, TestArmour.SteelLight);
         public static BattleEntity Freddie = new BattleEntity("Freddie", (byte)(levelBase + 1),     9,  11, 8,  5,  6,  10, 12, 7,  TestPhysWeapons.DoubleBass, TestArmour.NiceSuit);
         public static BattleEntity James = new BattleEntity("James", (byte)(levelBase + 1),         6,  8,  11, 7,  12, 9,  6,  9,  TestMagWeapons.IronStaff, TestArmour.WhiteRobes);
@@ -77,14 +77,14 @@ namespace RPGExperiments
 
         public ushort MaxHealth { get => (ushort)Utils.Clamp((12 + baseVit) * level * 6 + baseLck * Math.Log(level), 1, 9999); }
         public ushort MaxMana { get => (ushort)Utils.Clamp(((baseInt + baseSpt + baseRes) * 2 / 3) * level / 1.5 + baseLck * Math.Log(level), 1, 999); }
-        public ushort PhysAtk { get => (ushort)Utils.Clamp((level * (baseStr + 8)) / 2 + (level * weapon.WType.pow * weapon.Power / 4), 1, 999); }
+        public ushort PhysAtk { get => (ushort)Utils.Clamp((level * (baseStr + 8)) / 2 + (level * weapon.WType.pow * weapon.PhysPower / 4), 1, 999); }
         public ushort PhysDef { get => (ushort)Utils.Clamp((level * (baseVit + 8)) / 2 + (level * armour.Protection / 4), 1, 999); }
-        public ushort BlackMag { get => (ushort)Utils.Clamp((level * (baseInt * 1.5 + baseChr / 2) / 1.5), 1, 999); }
-        public ushort WhiteMag { get => (ushort)Utils.Clamp((level * (baseSpt * 1.5 + baseChr / 2) / 1.5), 1, 999); }
-        public ushort MagDef { get => (ushort)Utils.Clamp((level * ((baseRes * 1.5) + (baseInt + baseSpt) / 4) / 1.5), 1, 999); }
+        public ushort BlackMag { get => (ushort)Utils.Clamp(level * (baseInt + (baseChr / 4)) + (level * weapon.MagPower / 4), 1, 999); }
+        public ushort WhiteMag { get => (ushort)Utils.Clamp(level * (baseSpt + (baseChr / 4)) + (level * weapon.MagPower / 4), 1, 999); }
+        public ushort MagDef { get => (ushort)Utils.Clamp(level * ((baseRes * 1.5) + (baseInt + baseSpt) / 4) / 1.5, 1, 999); }
         public byte HitRate { get => (byte)Utils.Clamp(1.5 * Math.Sqrt((Math.Log(level) + 1) * (8 + baseAgl + baseLck) * 125), 1, 255); }
         public byte Speed { get => (byte)Utils.Clamp(1.5 * Math.Sqrt((Math.Log(level) + 1) * (baseAgl + 8) * 200 + 2 * baseStr), 1, 255); }
-        public byte Charm { get => (byte)Utils.Clamp(1.5 * Math.Sqrt(((Math.Log(level) + 1) * (baseChr + 8)) * 200 + baseLck), 1, 255); }
+        public byte Charm { get => (byte)Utils.Clamp(1.5 * Math.Sqrt((Math.Log(level) + 1) * (baseChr + 8) * 200 + baseLck), 1, 255); }
 
         public ushort PhysicalAttackDamage(BattleEntity defender, Random r)
         {

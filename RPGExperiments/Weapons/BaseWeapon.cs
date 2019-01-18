@@ -2,7 +2,7 @@
 
 namespace RPGExperiments.Weapons
 {
-    public class BaseWeapon
+    public abstract class BaseWeapon
     {
         /* Goes from 1 to 32. Represents attacking modifier for the weapon based on quality.
          * 1-5: Barely qualifies as a weapon.
@@ -12,13 +12,16 @@ namespace RPGExperiments.Weapons
          * 21-25: Rare and specialist/magical weapons, expensive to obtain.
          * 26-30: One-of-a-kind equipment, such as boss drops.
          * 31-32: A weapon imbued with sacred or legendary power. */
-        private WeaponType wType;
+        public abstract byte PhysPower { get; }
+        public abstract byte MagPower { get; }
+
+        protected WeaponType wType;
         public WeaponType WType { get => wType; }
 
-        private byte power;
+        protected byte power;
         public byte Power { get => power; }
 
-        private string name;
+        protected string name;
         public string Name { get => name; }
 
         public BaseWeapon(WeaponType type_, byte power_, string name_)

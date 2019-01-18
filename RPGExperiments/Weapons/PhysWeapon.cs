@@ -14,15 +14,17 @@ namespace RPGExperiments.Weapons
         public static PhysWeapon CrystalDagger = new PhysWeapon(WeaponTypes.Dagger, 27, "Crystal Dagger");
         public static PhysWeapon KnifeOfSilence = new PhysWeapon(WeaponTypes.Dagger, 21, "Knife of Silence");
 
-        public static PhysWeapon AzureSword = new PhysWeapon(WeaponTypes.Sword, 16, "Azure Sword");
         public static PhysWeapon RedSword = new PhysWeapon(WeaponTypes.Sword, 18, "Red Sword");
         public static PhysWeapon DoubleBass = new PhysWeapon(WeaponTypes.Club, 31, "Double Bass");
 
-        public static List<PhysWeapon> PhysWeapons = new List<PhysWeapon> { MythrilShortsword, SteelBroadsword, CrystalDagger, KnifeOfSilence, AzureSword, RedSword, DoubleBass };
+        public static List<PhysWeapon> PhysWeapons = new List<PhysWeapon> { MythrilShortsword, SteelBroadsword, CrystalDagger, KnifeOfSilence, RedSword, DoubleBass };
     }
 
     public class PhysWeapon : BaseWeapon
     {
+        public override byte PhysPower { get => power; }
+        public override byte MagPower { get => 0; }
+
         public PhysWeapon(WeaponType type_, byte power_, string name_) : base(type_, power_, name_)
         {
 

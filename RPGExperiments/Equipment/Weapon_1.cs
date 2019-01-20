@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RPGExperiments.Weapons
+namespace RPGExperiments.Equipment
 {
     public static class TestPhysWeapons
     {
@@ -20,7 +20,7 @@ namespace RPGExperiments.Weapons
         public static List<PhysWeapon> PhysWeapons = new List<PhysWeapon> { MythrilShortsword, SteelBroadsword, CrystalDagger, KnifeOfSilence, RedSword, DoubleBass };
     }
 
-    public class PhysWeapon : BaseWeapon
+    public class PhysWeapon : BaseEquipment
     {
         public override byte PhysPower { get => power; }
         public override byte MagPower { get => 0; }

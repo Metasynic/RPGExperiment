@@ -6,7 +6,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{AD10991C-9AE9-488B-BD76-168350F6C7A6}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>StatFormulaExperiments</RootNamespace>
+    <RootNamespace>RPGExperiments</RootNamespace>
     <AssemblyName>StatFormulaExperiments</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -42,22 +42,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Armour.cs" />
-    <Compile Include="BattleEntity.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Spell.cs" />
     <Compile Include="Utils.cs" />
-    <Compile Include="Weapons\WeaponType.cs" />
-    <Compile Include="Weapons\PhysWeapon.cs" />
-    <Compile Include="Weapons\MagWeapon.cs" />
-    <Compile Include="Weapons\BaseWeapon.cs" />
+    <Compile Include="Equipment\WeaponType.cs" />
+    <Compile Include="Equipment\Weapon.cs" />
+    <Compile Include="Equipment\BaseEquipment.cs" />
+    <Compile Include="Equipment\Armour.cs" />
+    <Compile Include="Entities\PlayerEntity.cs" />
+    <Compile Include="Entities\BaseEntity.cs" />
+    <Compile Include="Equipment\Accessory.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\" />
-    <Folder Include="Weapons\" />
+    <Folder Include="Equipment\" />
+    <Folder Include="Entities\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

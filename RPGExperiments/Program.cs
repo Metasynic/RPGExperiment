@@ -1,24 +1,22 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using RPGExperiments.Entities;
 
 namespace RPGExperiments
 {
     public class Program
     {
-        static void printCharacter(BattleEntity b)
+        static void printCharacter(BaseEntity b)
         {
             Console.WriteLine(b.Name.PadRight(9) + " Lv: " + b.Level + " BST: " + b.BaseStatTotal + " HP: " + b.MaxHealth + " MP: " + b.MaxMana + " Atk: " + b.PhysAtk + " Def: " + b.PhysDef + " BMag: " + b.BlackMag + " WMag: " + b.WhiteMag + " MDef: " + b.MagDef + " Hit: " + b.HitRate + " Spd: " + b.Speed + " Crm: " + b.Charm);
         }
 
-        static void printPhysicalAttack(BattleEntity attacker, BattleEntity defender, Random r)
+        static void printPhysicalAttack(BaseEntity attacker, BaseEntity defender, Random r)
         {
             Console.WriteLine(attacker.Name + " does " + attacker.PhysicalAttackDamage(defender, r) + " damage to " + defender.Name + ".");
         }
 
-        static void printSpell(BattleEntity attacker, BattleEntity defender, Random r) {
+        static void printSpell(BaseEntity attacker, BaseEntity defender, Random r) {
             Spell spell = attacker.Spells.Keys.ElementAt(r.Next(0, attacker.Spells.Keys.Count));
             byte level = attacker.Spells[spell];
             if (spell.GetType() == typeof(AttackSpell)) {
@@ -38,7 +36,7 @@ namespace RPGExperiments
             TestEntities.Sam.AddSpells(TestSpells.BlueMageSet, spellLevel);
             TestEntities.Lewis.AddSpells(TestSpells.RedMageSet, spellLevel);
 
-            foreach (BattleEntity entity in TestEntities.Entities)
+            foreach (BaseEntity entity in TestEntities.Entities)
             {
                 printCharacter(entity);
             }

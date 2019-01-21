@@ -1,19 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
-namespace RPGExperiments
+namespace RPGExperiments.Spells
 {
     public enum Element { None, Earth, Air, Fire, Water, Lightning, Ice, Nature, Light, Dark }
-    public enum Target { Single, EitherEnemy, Multi, Ally, Party, EitherAlly, None }
+    public enum Target { SingleEnemy, EitherEnemy, AllEnemy, SingleAlly, EitherAlly, AllAlly, None }
 
     public static class TestSpells
     {
         // Stand-alone specialist spells
-        public static readonly AttackSpell Explosion = new AttackSpell("Explosion", Target.Multi, true, Element.None, 6.0, 200);
-        public static readonly AttackSpell Blast = new AttackSpell("Blast", Target.Multi, true, Element.None, 3.5, 110);
+        public static readonly AttackSpell Explosion = new AttackSpell("Explosion", Target.AllEnemy, true, Element.None, 6.0, 200);
+        public static readonly AttackSpell Blast = new AttackSpell("Blast", Target.AllEnemy, true, Element.None, 3.5, 110);
         public static readonly AttackSpell Lumina = new AttackSpell("Lumina", Target.EitherEnemy, false, Element.Light, 5.8, 185);
         public static readonly AttackSpell Eclipse = new AttackSpell("Eclipse", Target.EitherEnemy, true, Element.Dark, 5.8, 185);
         public static readonly AttackSpell Aura = new AttackSpell("Aura", Target.EitherEnemy, false, Element.Light, 2.5, 80);
@@ -63,24 +59,24 @@ namespace RPGExperiments
         public static readonly HealSpell UltimateCure = new HealSpell("Ultimate Cure", Target.EitherAlly, false, 5.75, 180);
 
         // Single-target blue magic attacks
-        public static readonly AttackSpell Torch = new AttackSpell("Torch", Target.Single, true, Element.Fire, 1.1, 32, true);
-        public static readonly AttackSpell Radiance = new AttackSpell("Radiance", Target.Single, true, Element.Light, 2.5, 75, true);
-        public static readonly AttackSpell Blossom = new AttackSpell("Blossom", Target.Single, true, Element.Nature, 4.3, 130, true);
-        public static readonly AttackSpell Geode = new AttackSpell("Geode", Target.Single, true, Element.Earth, 5.9, 185, true);
-        public static readonly AttackSpell ShadowCore = new AttackSpell("Shadow Core", Target.Single, true, Element.Dark, 7.5, 210, true);
+        public static readonly AttackSpell Torch = new AttackSpell("Torch", Target.SingleEnemy, true, Element.Fire, 1.1, 32, true);
+        public static readonly AttackSpell Radiance = new AttackSpell("Radiance", Target.SingleEnemy, true, Element.Light, 2.5, 75, true);
+        public static readonly AttackSpell Blossom = new AttackSpell("Blossom", Target.SingleEnemy, true, Element.Nature, 4.3, 130, true);
+        public static readonly AttackSpell Geode = new AttackSpell("Geode", Target.SingleEnemy, true, Element.Earth, 5.9, 185, true);
+        public static readonly AttackSpell ShadowCore = new AttackSpell("Shadow Core", Target.SingleEnemy, true, Element.Dark, 7.5, 210, true);
 
         // Multi-target blue magic attacks
-        public static readonly AttackSpell Waterfall = new AttackSpell("Waterfall", Target.Multi, true, Element.Water, 1.75, 68, true);
-        public static readonly AttackSpell ChargeField = new AttackSpell("Charge Field", Target.Multi, true, Element.Lightning, 3.0, 90, true);
-        public static readonly AttackSpell FuryWind = new AttackSpell("Fury Wind", Target.Multi, true, Element.Air, 3.6, 115, true);
-        public static readonly AttackSpell Glacier = new AttackSpell("Glacier", Target.Multi, true, Element.Ice, 4.75, 140, true);
-        public static readonly AttackSpell ChaosFold = new AttackSpell("Chaos Fold", Target.Multi, true, Element.None, 5.5, 190, true);
+        public static readonly AttackSpell Waterfall = new AttackSpell("Waterfall", Target.AllEnemy, true, Element.Water, 1.75, 68, true);
+        public static readonly AttackSpell ChargeField = new AttackSpell("Charge Field", Target.AllEnemy, true, Element.Lightning, 3.0, 90, true);
+        public static readonly AttackSpell FuryWind = new AttackSpell("Fury Wind", Target.AllEnemy, true, Element.Air, 3.6, 115, true);
+        public static readonly AttackSpell Glacier = new AttackSpell("Glacier", Target.AllEnemy, true, Element.Ice, 4.75, 140, true);
+        public static readonly AttackSpell ChaosFold = new AttackSpell("Chaos Fold", Target.AllEnemy, true, Element.None, 5.5, 190, true);
 
         // The cosmic magics, ridiculously powerful and capable of breaking the damage limit
-        public static readonly AttackSpell Comet = new AttackSpell("Comet", Target.Multi, true, Element.None, 3.75, 100, false, true);
-        public static readonly AttackSpell Meteor = new AttackSpell("Meteor", Target.Multi, true, Element.None, 5.75, 150, false, true);
-        public static readonly AttackSpell Starfall = new AttackSpell("Starfall", Target.Multi, true, Element.None, 8.0, 200, false, true);
-        public static readonly AttackSpell Nova = new AttackSpell("Nova", Target.Multi, true, Element.None, 16.0, 500, false, true);
+        public static readonly AttackSpell Comet = new AttackSpell("Comet", Target.AllEnemy, true, Element.None, 3.75, 100, false, true);
+        public static readonly AttackSpell Meteor = new AttackSpell("Meteor", Target.AllEnemy, true, Element.None, 5.75, 150, false, true);
+        public static readonly AttackSpell Starfall = new AttackSpell("Starfall", Target.AllEnemy, true, Element.None, 8.0, 200, false, true);
+        public static readonly AttackSpell Nova = new AttackSpell("Nova", Target.AllEnemy, true, Element.None, 16.0, 500, false, true);
 
         // Spell lists (by category)
         public static readonly List<AttackSpell> Specialist = new List<AttackSpell> { Explosion, Blast, Lumina, Eclipse, Aura, Shadow };
@@ -94,22 +90,22 @@ namespace RPGExperiments
         public static readonly List<AttackSpell> Cosmic = new List<AttackSpell> { Comet, Meteor, Starfall, Nova };
 
         // Spell lists (by class)
-        public static readonly List<Spell> BlackMageSet = new List<Spell> { Explosion, Eclipse, Shadow,
+        public static readonly List<BaseSpell> BlackMageSet = new List<BaseSpell> { Explosion, Eclipse, Shadow,
             Frost, Flame, Gust, Bolt, Wave, Rockfall, Sprout,
             Hail, Blaze, Gale, Discharge, Downpour, Boulder, Growth,
             Blizzard, Inferno, Tornado, Surge, Flood, Landslide, Emergence,
             Avalanche, Flare, Hurricane, Storm, Tsunami, Earthquake, Awakening };
-        public static readonly List<Spell> WhiteMageSet = new List<Spell> {Lumina, Aura,
+        public static readonly List<BaseSpell> WhiteMageSet = new List<BaseSpell> {Lumina, Aura,
             LightCure, MediumCure, HeavyCure, UltimateCure };
-        public static readonly List<Spell> RedMageSet = new List<Spell> {Blast,
+        public static readonly List<BaseSpell> RedMageSet = new List<BaseSpell> {Blast,
             Frost, Flame, Gust, Bolt, Wave, Rockfall, Sprout,
             Hail, Blaze, Gale, Discharge, Downpour, Boulder, Growth };
-        public static readonly List<Spell> BlueMageSet = new List<Spell> { 
+        public static readonly List<BaseSpell> BlueMageSet = new List<BaseSpell> { 
             Torch, Radiance, Blossom, Geode, ShadowCore,
             Waterfall, ChargeField, FuryWind, Glacier, ChaosFold };
     }
 
-    public class Spell
+    public class BaseSpell
     {
         protected string name;
         public string Name { get => name; }
@@ -123,46 +119,16 @@ namespace RPGExperiments
         protected bool blue;
         public bool Blue { get => blue; }
 
-        private ushort cost;
+        protected ushort cost;
         public ushort Cost { get => cost; }
 
-        public Spell(string name_, Target target_, bool black_, bool blue_, ushort cost_)
+        public BaseSpell(string name_, Target target_, bool black_, bool blue_, ushort cost_)
         {
             name = name_;
             target = target_;
             black = black_;
             blue = blue_;
             cost = cost_;
-        }
-    }
-
-    public class AttackSpell : Spell
-    {
-        private Element element;
-        public Element Element { get => element; }
-
-        private double power;
-        public double Power { get => power; }
-
-        private bool breakDamageLimit;
-        public bool BreakDamageLimit { get => breakDamageLimit; }
-
-        public AttackSpell(string name_, Target target_, bool black_, Element element_, double power_, ushort cost_, bool blue_ = false, bool breakDamageLimit_ = false) : base(name_, target_, black_, blue_, cost_)
-        {
-            element = element_;
-            power = power_;
-            breakDamageLimit = breakDamageLimit_;
-        }
-    }
-
-    public class HealSpell : Spell
-    {
-        private double power;
-        public double Power { get => power; }
-
-        public HealSpell(string name_, Target target_, bool black_, double power_, ushort cost_, bool blue_ = false) : base(name_, target_, black_, blue_, cost_)
-        {
-            power = power_;
         }
     }
 }

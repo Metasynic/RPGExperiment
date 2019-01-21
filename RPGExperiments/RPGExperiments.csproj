@@ -43,7 +43,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Program.cs" />
-    <Compile Include="Spell.cs" />
     <Compile Include="Utils.cs" />
     <Compile Include="Equipment\WeaponType.cs" />
     <Compile Include="Equipment\Weapon.cs" />
@@ -52,6 +51,9 @@
     <Compile Include="Entities\PlayerEntity.cs" />
     <Compile Include="Entities\BaseEntity.cs" />
     <Compile Include="Equipment\Accessory.cs" />
+    <Compile Include="Spells\BaseSpell.cs" />
+    <Compile Include="Spells\AttackSpell.cs" />
+    <Compile Include="Spells\HealSpell.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -60,6 +62,7 @@
     <Folder Include="Properties\" />
     <Folder Include="Equipment\" />
     <Folder Include="Entities\" />
+    <Folder Include="Spells\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

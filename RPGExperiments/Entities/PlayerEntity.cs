@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using RPGExperiments.Equipment;
+using RPGExperiments.Spells;
 
 namespace RPGExperiments.Entities
 {
@@ -40,11 +41,11 @@ namespace RPGExperiments.Entities
 
         public override ushort MaxHealth { get => (ushort)Utils.Clamp((12 + baseVit) * level * 7 + baseLck * Math.Log(level) + TotalHealthInc, 1, 9999); }
         public override ushort MaxMana { get => (ushort)Utils.Clamp((baseInt + baseSpt + baseRes / 2) * level / 1.5 + baseLck * Math.Log(level) + TotalManaInc, 1, 999); }
-        public override ushort PhysAtk { get => (ushort)Utils.Clamp((level * (baseStr + 10) / 2 + TotalPhysAtkInc) * PowerMultiplier, 1, 999); }
-        public override ushort PhysDef { get => (ushort)Utils.Clamp(level * (baseVit + 10) / 2 + TotalPhysDefInc, 1, 999); }
-        public override ushort BlackMag { get => (ushort)Utils.Clamp(level * (baseInt + (baseChr / 4)) / 1.5 + TotalBlackMagInc, 1, 999); }
-        public override ushort WhiteMag { get => (ushort)Utils.Clamp(level * (baseSpt + (baseChr / 4)) / 1.5 + TotalWhiteMagInc, 1, 999); }
-        public override ushort MagDef { get => (ushort)Utils.Clamp(level * ((baseRes) + (baseInt + baseSpt) / 4) / 1.5 + TotalMagDefInc, 1, 999); }
+        public override ushort PhysAtk { get => (ushort)Utils.Clamp(((baseStr + 10) * level / 2 + TotalPhysAtkInc) * PowerMultiplier, 1, 999); }
+        public override ushort PhysDef { get => (ushort)Utils.Clamp((baseVit + 10) * level / 2 + TotalPhysDefInc, 1, 999); }
+        public override ushort BlackMag { get => (ushort)Utils.Clamp((baseInt + (baseChr / 2)) * level / 1.5 + TotalBlackMagInc, 1, 999); }
+        public override ushort WhiteMag { get => (ushort)Utils.Clamp((baseSpt + (baseChr / 2)) * level / 1.5 + TotalWhiteMagInc, 1, 999); }
+        public override ushort MagDef { get => (ushort)Utils.Clamp((baseRes + (baseInt + baseSpt) / 4) * level / 1.5 + TotalMagDefInc, 1, 999); }
         public override ushort HitRate { get => (ushort)Utils.Clamp((8 + baseAgl + baseLck / 2) * level / 1.5 + TotalHitRateInc, 1, 999); }
         public override ushort Speed { get => (ushort)Utils.Clamp((8 + baseAgl + baseStr / 2) * level / 1.5 + TotalSpeedInc, 1, 999); }
         public override ushort Charm { get => (ushort)Utils.Clamp((8 + baseChr + baseLck / 2) * level / 1.5 + TotalCharmInc, 1, 999); }
@@ -72,7 +73,7 @@ namespace RPGExperiments.Entities
             Weapon = weapon_;
             Armour = armour_;
             Accessory = accessory_;
-            spells = new Dictionary<Spell, byte>();
+            spells = new Dictionary<BaseSpell, byte>();
         }
 
         private double getCritMult()

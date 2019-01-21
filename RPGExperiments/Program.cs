@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using RPGExperiments.Entities;
+using RPGExperiments.Spells;
 
 namespace RPGExperiments
 {
@@ -17,7 +18,7 @@ namespace RPGExperiments
         }
 
         static void printSpell(BaseEntity attacker, BaseEntity defender, Random r) {
-            Spell spell = attacker.Spells.Keys.ElementAt(r.Next(0, attacker.Spells.Keys.Count));
+            BaseSpell spell = attacker.Spells.Keys.ElementAt(r.Next(0, attacker.Spells.Keys.Count));
             byte level = attacker.Spells[spell];
             if (spell.GetType() == typeof(AttackSpell)) {
                 Console.WriteLine(attacker.Name + " cast " + spell.Name + " on " + defender.Name + " for " + attacker.SpellAttackDamage(defender, r, (AttackSpell)spell, level));

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using RPGExperiments.Spells;
 
 namespace RPGExperiments.Entities
 {
@@ -12,8 +13,8 @@ namespace RPGExperiments.Entities
         protected string name;
         public string Name { get => name; }
 
-        protected Dictionary<Spell, byte> spells;
-        public Dictionary<Spell, byte> Spells { get => spells; }
+        protected Dictionary<BaseSpell, byte> spells;
+        public Dictionary<BaseSpell, byte> Spells { get => spells; }
 
         /* Base stats vary from 1 to 16 for simplicity.
          * 1-2: Abysmal.
@@ -23,7 +24,19 @@ namespace RPGExperiments.Entities
          * 9-10: Decent.
          * 11-12: Pretty good.
          * 13-14: Very talented.
-         * 15-16: Godlike. */
+         * 15-16: Godlike. 
+         */
+
+        /* The base stats are as follows:
+         * Strength (STR) - how strong you are, determines physical attack damage.
+         * Vitality (VIT) - how tough and resistant to pain you are, affects health and physical defence.
+         * Agility (AGL) - how fast or nimble you are, affects speed and hit rate.
+         * Intelligence (INT) - how logical or clever you are, affects black magic and mana.
+         * Spirit (SPR) - how compassionate and thoughtful you are, affects white magic and mana.
+         * Resistance (RES) - how much willpower and conviction you have, affects magic defence and mana.
+         * Luck (LCK) - how much fortune happens to favour you, affects hit rate and charm.
+         * Charisma (CHR) - how friendly and personable you are to others, affects charm and magic.
+         */
         protected byte baseStr;
         protected byte baseVit;
         protected byte baseAgl;
@@ -112,14 +125,14 @@ namespace RPGExperiments.Entities
             return (ushort)Utils.Clamp(rawHeal, 1, 9999);
         }
 
-        public void AddSpell(Spell spell, byte level)
+        public void AddSpell(BaseSpell spell, byte level)
         {
             spells.Add(spell, level);
         }
 
-        public void AddSpells(ICollection<Spell> spellsCollection, byte level)
+        public void AddSpells(ICollection<BaseSpell> spellsCollection, byte level)
         {
-            foreach (Spell spell in spellsCollection)
+            foreach (BaseSpell spell in spellsCollection)
             {
                 spells.Add(spell, level);
             }

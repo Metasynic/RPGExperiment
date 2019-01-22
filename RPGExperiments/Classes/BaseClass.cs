@@ -7,7 +7,7 @@ namespace RPGExperiments.Classes
 {
     public static class CharacterClasses
     {
-        // The adventurer is a jack-of-all-trades, able to learn any non-exclusive technique or spell
+        // The adventurer is a jack-of-all-trades, able to learn any non-class-exclusive technique or spell
         // but at a higher experience cost to learn and upgrade than the other classes.
         public static BaseClass Adventurer = new BaseClass("Adventurer",
         new List<Weapon>(),
@@ -59,6 +59,20 @@ namespace RPGExperiments.Classes
         new List<Accessory>(),
         new List<BaseSpell>{ Torch, Radiance, Blossom, Geode, ShadowCore,
             Waterfall, ChargeField, FuryWind, Glacier, ChaosFold });
+
+        // The summoner calls upon various mythical creatures to help them in battle.
+        public static BaseClass Summoner = new BaseClass("Summoner",
+        new List<Weapon>(),
+        new List<Armour>(),
+        new List<Accessory>(),
+        new List<BaseSpell>());
+
+        // The geomancer channels the power of their environment to inflict damage on their enemies.
+        public static BaseClass Geomancer = new BaseClass("Geomancer",
+        new List<Weapon>(),
+        new List<Armour>(),
+        new List<Accessory>(),
+        new List<BaseSpell>());
 
         // Fighters use straight forward physical attacks to hit their enemies, placing an emphasis
         // on strength and speed to get lots of hits in.

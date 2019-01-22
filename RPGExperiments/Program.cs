@@ -19,13 +19,7 @@ namespace RPGExperiments
 
         static void printSpell(BaseEntity attacker, BaseEntity defender, Random r) {
             BaseSpell spell = attacker.Spells.Keys.ElementAt(r.Next(0, attacker.Spells.Keys.Count));
-            byte level = attacker.Spells[spell];
-            if (spell.GetType() == typeof(AttackSpell)) {
-                Console.WriteLine(attacker.Name + " cast " + spell.Name + " on " + defender.Name + " for " + attacker.SpellAttackDamage(defender, r, (AttackSpell)spell, level));
-            }
-            else if (spell.GetType() == typeof(HealSpell)) {
-                Console.WriteLine(attacker.Name + " cast " + spell.Name + " on " + defender.Name + " healing " + attacker.SpellHealAmount(defender, r, (HealSpell)spell, level));
-            }
+            Console.WriteLine(attacker.Name + " cast " + spell.Name + " on " + defender.Name + " for " + attacker.CastSpell(spell, defender, r));
         }
 
         static void Main(string[] args)

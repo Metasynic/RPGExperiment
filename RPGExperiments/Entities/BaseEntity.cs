@@ -84,6 +84,8 @@ namespace RPGExperiments.Entities
         {
             ushort damage = (ushort)Utils.Clamp(PhysAtk * 4 - defender.PhysDef + r.Next(1, (ushort)(3 + Math.Log(level) * baseLck)), 1, 9999);
 
+            // TODO: Move printlines somewhere else
+
             if (r.NextDouble() < CritMultiplier)
             {
                 Console.WriteLine("Critical!");
@@ -98,32 +100,17 @@ namespace RPGExperiments.Entities
                 return damage;
         }
 
-        public ushort SpellAttackDamage(BaseEntity defender, Random r, AttackSpell spell, byte level)
+        public ushort CastSpell(BaseSpell spell, BaseEntity target, Random r)
         {
-            ushort mag;
-            if (spell.Black)
-                mag = BlackMag;
-            else
-                mag = WhiteMag;
+            if (!spells.ContainsKey(spell))
+                throw new Exception(name + " called CastSpell() with spell " + spell.Name + ", which is not in their spell list.");
 
-            ushort rawDamage = (ushort)(mag * (spell.Power + (level / 8) * spell.Power) - defender.MagDef + r.Next(1, (ushort)(3 + Math.Log(this.level) * baseLck)));
-            if (spell.BreakDamageLimit)
-                return rawDamage;
-            else
-                return (ushort)Utils.Clamp(rawDamage, 1, 9999);
-        }
+            if (spell.GetType() == typeof(AttackSpell))
+                return ((AttackSpell)spell).AttackDamage(this, target, r, (AttackSpell)spell, spells[spell], baseLck);
+            if (spell.GetType() == typeof(HealSpell))
+                return ((HealSpell)spell).HealAmount(this, target, r, (HealSpell)spell, spells[spell], baseLck);
 
-        public ushort SpellHealAmount(BaseEntity patient, Random r, HealSpell spell, byte level)
-        {
-            ushort mag;
-            if (spell.Black)
-                mag = BlackMag;
-            else
-                mag = WhiteMag;
-
-            ushort rawHeal = (ushort)(mag * (spell.Power + (level / 8) * spell.Power) + r.Next(1, (ushort)(3 + Math.Log(this.level) * baseLck)));
-
-            return (ushort)Utils.Clamp(rawHeal, 1, 9999);
+            throw new Exception(name + " tried to cast a spell " + spell.Name + " with unknown type.");
         }
 
         public void AddSpell(BaseSpell spell, byte level)

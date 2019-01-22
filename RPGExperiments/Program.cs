@@ -31,11 +31,11 @@ namespace RPGExperiments
         static void Main(string[] args)
         {
             byte spellLevel = 8;
-            TestEntities.Aqua.AddSpells(TestSpells.WhiteMageSet, spellLevel);
+            TestEntities.Aqua.AddSpells(TestEntities.Aqua.CharacterClass.AllowedSpells, spellLevel);
             TestEntities.Megumin.AddSpell(TestSpells.Explosion, spellLevel);
-            TestEntities.Yunyun.AddSpells(TestSpells.BlackMageSet, spellLevel);
-            TestEntities.Sam.AddSpells(TestSpells.BlueMageSet, spellLevel);
-            TestEntities.Lewis.AddSpells(TestSpells.RedMageSet, spellLevel);
+            TestEntities.Yunyun.AddSpells(TestEntities.Yunyun.CharacterClass.AllowedSpells, spellLevel);
+            TestEntities.Sam.AddSpells(TestEntities.Sam.CharacterClass.AllowedSpells, spellLevel);
+            TestEntities.Lewis.AddSpells(TestEntities.Lewis.CharacterClass.AllowedSpells, spellLevel);
 
             foreach (BaseEntity entity in TestEntities.Entities)
             {

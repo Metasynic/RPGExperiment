@@ -74,9 +74,10 @@ namespace RPGExperiments.Entities
 
         public byte BaseStatTotal { get => (byte)(baseStr + baseVit + baseAgl + baseInt + baseSpt + baseRes + baseLck + baseChr); }
 
-        protected BaseEntity()
+        protected BaseEntity(string name_, byte level_)
         {
-
+            name = name_;
+            level = level_;
         }
 
         public ushort PhysicalAttackDamage(BaseEntity defender, Random r)

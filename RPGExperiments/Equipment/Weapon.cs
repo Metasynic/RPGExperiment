@@ -12,7 +12,7 @@ namespace RPGExperiments.Equipment
         public static Weapon AzureStaff = new Weapon(WeaponTypes.Staff, new StatIncrease(       0,   0,   50,  0,   110, 130, 0,   0,   0,   0), "Azure Staff");
         public static Weapon IronStaff = new Weapon(WeaponTypes.Staff, new StatIncrease(        0,   0,   30,  0,   110, 110, 0,   0,   0,   0), "Iron Staff");
         public static Weapon MythrilShortsword = new Weapon(WeaponTypes.Sword, new StatIncrease(0,   0,   130, 0,   0,   0,   0,   0,   0,   0), "Mythril Shortsword");
-        public static Weapon SteelBroadsword = new Weapon(WeaponTypes.Sword, new StatIncrease(  0,   0,   150, 0,   0,   0,   0,   0,   0,   0), "Steel Broadsword");
+        public static Weapon SteelBroadsword = new Weapon(WeaponTypes.Sword, new StatIncrease(  0,   0,   180, 0,   0,   0,   0,   0,   0,   0), "Steel Broadsword");
         public static Weapon CrystalDagger = new Weapon(WeaponTypes.Dagger, new StatIncrease(   0,   0,   200, 0,   0,   60,  0,   0,   0,   0), "Crystal Dagger");
         public static Weapon KnifeOfSilence = new Weapon(WeaponTypes.Dagger, new StatIncrease(  0,   0,   110, 0,   0,   0,   0,   0,   100, 0), "Knife of Silence");
         public static Weapon RedSword = new Weapon(WeaponTypes.Sword, new StatIncrease(         0,   0,   100, 0,   60,  80,  0,   0,   0,   0), "Red Sword");

@@ -88,21 +88,6 @@ namespace RPGExperiments.Spells
         public static readonly List<AttackSpell> SingleElemBlue = new List<AttackSpell> { Torch, Radiance, Blossom, Geode, ShadowCore };
         public static readonly List<AttackSpell> MultiElemBlue = new List<AttackSpell> { Waterfall, ChargeField, FuryWind, Glacier, ChaosFold };
         public static readonly List<AttackSpell> Cosmic = new List<AttackSpell> { Comet, Meteor, Starfall, Nova };
-
-        // Spell lists (by class)
-        public static readonly List<BaseSpell> BlackMageSet = new List<BaseSpell> { Explosion, Eclipse, Shadow,
-            Frost, Flame, Gust, Bolt, Wave, Rockfall, Sprout,
-            Hail, Blaze, Gale, Discharge, Downpour, Boulder, Growth,
-            Blizzard, Inferno, Tornado, Surge, Flood, Landslide, Emergence,
-            Avalanche, Flare, Hurricane, Storm, Tsunami, Earthquake, Awakening };
-        public static readonly List<BaseSpell> WhiteMageSet = new List<BaseSpell> {Lumina, Aura,
-            LightCure, MediumCure, HeavyCure, UltimateCure };
-        public static readonly List<BaseSpell> RedMageSet = new List<BaseSpell> {Blast,
-            Frost, Flame, Gust, Bolt, Wave, Rockfall, Sprout,
-            Hail, Blaze, Gale, Discharge, Downpour, Boulder, Growth };
-        public static readonly List<BaseSpell> BlueMageSet = new List<BaseSpell> { 
-            Torch, Radiance, Blossom, Geode, ShadowCore,
-            Waterfall, ChargeField, FuryWind, Glacier, ChaosFold };
     }
 
     public class BaseSpell

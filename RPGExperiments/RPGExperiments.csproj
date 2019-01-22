@@ -54,6 +54,7 @@
     <Compile Include="Spells\BaseSpell.cs" />
     <Compile Include="Spells\AttackSpell.cs" />
     <Compile Include="Spells\HealSpell.cs" />
+    <Compile Include="Classes\BaseClass.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -63,6 +64,7 @@
     <Folder Include="Equipment\" />
     <Folder Include="Entities\" />
     <Folder Include="Spells\" />
+    <Folder Include="Classes\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

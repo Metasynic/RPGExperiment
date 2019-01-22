@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace RPGExperiments.Equipment
 {
@@ -16,7 +12,7 @@ namespace RPGExperiments.Equipment
         public static Armour CrimsonUniform = new Armour(new StatIncrease(0,   0,   0,   40,  0,   0,   90,  0,   0,   0), "School Uniform");
         public static Armour ThiefSuit = new Armour(new StatIncrease(     0,   0,   0,   60,  0,   0,   70,  0,   0,   0), "Thief Suit");
         public static Armour AzureCloak = new Armour(new StatIncrease(    0,   0,   0,   30,  0,   0,   80,  0,   0,   0), "Azure Cloak");
-        public static Armour SteelLight = new Armour(new StatIncrease(    0,   0,   0,   110, 0,   0,   30,  0,   0,   0), "Steel Light");
+        public static Armour SteelLight = new Armour(new StatIncrease(    0,   0,   0,   120, 0,   0,   30,  0,   0,   0), "Steel Light");
         public static Armour NiceSuit = new Armour(new StatIncrease(      0,   0,   0,   20,  0,   0,   20,  0,   0,   0), "Nice Suit");
         public static Armour WhiteRobes = new Armour(new StatIncrease(    0,   0,   0,   40,  0,   20,  110, 0,   0,   0), "White Robes");
         public static Armour Clothes = new Armour(new StatIncrease(       0,   0,   0,   0,   0,   0,   0,   0,   0,   0), "Clothes");

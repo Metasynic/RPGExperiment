@@ -88,6 +88,9 @@ namespace RPGExperiments.Entities
         public abstract double CritRate { get; }
         public abstract double HitMultiplier { get; }
         public abstract double PowerMultiplier { get; }
+        public abstract double PhysDefMultiplier { get; }
+        public abstract double MagDefMultiplier { get; }
+        public abstract double SpeedMultiplier { get; }
 
         public byte BaseStatTotal { get => (byte)(baseStr + baseVit + baseAgl + baseInt + baseSpt + baseRes + baseLck + baseChr); }
 
@@ -101,14 +104,12 @@ namespace RPGExperiments.Entities
         {
             ushort damage = (ushort)Utils.Clamp(PhysAtk * 4 - defender.PhysDef + r.Next(1, (ushort)(3 + Math.Log(level) * baseLck)), 1, 9999);
 
-            // TODO: Move printlines somewhere else
-
             if (r.NextDouble() < CritRate)
             {
                 /* Critical Hit */
                 return new DamageInfo((ushort)(damage * 2), true, false);
             }
-            if (r.Next(defender.Speed) > HitRate && r.Next(4) == 0)
+            if (r.Next(defender.Speed) > HitRate && r.Next(2) == 0)
             {
                 /* Glancing Hit */
                 return new DamageInfo((ushort)(damage / 2), false, true);

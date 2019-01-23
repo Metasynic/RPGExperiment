@@ -2,7 +2,7 @@
 namespace RPGExperiments.Equipment
 {
     public static class TestAccessories
-    {                                                                         /* HP   MP   PA   PB   BM   WM   MD   HR   SP   CH */
+    {                                                                         /* HP   MP   PA   PD   BM   WM   MD   HR   SP   CH */
         public static Accessory None = new Accessory(new StatIncrease(           0,   0,   0,   0,   0,   0,   0,   0,   0,   0), "None");
         public static Accessory StealSash = new Accessory(new StatIncrease(      0,   0,   0,   0,   0,   0,   0,   40,  20,  0), "Steal Sash");
         public static Accessory GoddessRibbon = new Accessory(new StatIncrease(  0,   0,   0,   0,   0,   0,   0,   0,   0,   80), "Goddess Ribbon");

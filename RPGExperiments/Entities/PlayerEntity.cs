@@ -21,10 +21,10 @@ namespace RPGExperiments.Entities
 
         public static PlayerEntity Sam = new PlayerEntity("Sam", (byte)(levelBase + 1),             7,  6,  9,  12, 10, 11, 6,  7,  CharacterClasses.BlueMage, TestWeapons.AzureStaff, TestArmour.AzureCloak, TestAccessories.AzureCape);
         public static PlayerEntity Lewis = new PlayerEntity("Lewis", (byte)(levelBase + 1),         9,  7,  7,  10, 12, 10, 4,  9,  CharacterClasses.RedMage, TestWeapons.RedSword, TestArmour.SteelLight, TestAccessories.RedGem);
-        public static PlayerEntity Freddie = new PlayerEntity("Freddie", (byte)(levelBase + 1),     9,  11, 8,  5,  6,  10, 12, 7,  CharacterClasses.Fighter, TestWeapons.DoubleBass, TestArmour.NiceSuit, TestAccessories.BowTie);
+        public static PlayerEntity Freddie = new PlayerEntity("Freddie", (byte)(levelBase + 1),     11, 9,  8,  5,  6,  10, 12, 7,  CharacterClasses.Monk, TestWeapons.MonkFists, TestArmour.NiceSuit, TestAccessories.BowTie);
         public static PlayerEntity James = new PlayerEntity("James", (byte)(levelBase + 1),         6,  8,  11, 7,  12, 9,  6,  9,  CharacterClasses.WhiteMage, TestWeapons.IronStaff, TestArmour.WhiteRobes, TestAccessories.WhiteArmlet);
 
-        public static PlayerEntity May = new PlayerEntity("May", (byte)(levelBase + 1),             6,  4,  12, 8,  5,  7,  16, 10,  CharacterClasses.Thief, TestWeapons.SteelDagger, TestArmour.ThiefCape, TestAccessories.CrimsonRibbon); 
+        public static PlayerEntity May = new PlayerEntity("May", (byte)(levelBase + 1),             6,  4,  12, 8,  5,  7,  16, 10, CharacterClasses.Thief, TestWeapons.SteelDagger, TestArmour.ThiefCape, TestAccessories.CrimsonRibbon); 
 
         public static List<PlayerEntity> Entities = new List<PlayerEntity> { Kazuma, Aqua, Megumin, Darkness, Wiz, Yunyun, Chris, Sam, Lewis, Freddie, James, May };
     }
@@ -45,12 +45,12 @@ namespace RPGExperiments.Entities
         public override ushort MaxHealth { get => (ushort)Utils.Clamp(((12 + baseVit) * level * 7 + baseLck * Math.Log(level)) * TotalHealthMult, 1, 9999); }
         public override ushort MaxMana { get => (ushort)Utils.Clamp(((baseInt + baseSpt + baseRes / 2) * level / 1.5 + baseLck * Math.Log(level)) * TotalManaMult, 1, 999); }
         public override ushort PhysAtk { get => (ushort)Utils.Clamp(((baseStr + 12) * level / 2 + TotalPhysAtkInc) * PowerMultiplier, 1, 999); }
-        public override ushort PhysDef { get => (ushort)Utils.Clamp((baseVit + 12) * level / 2 + TotalPhysDefInc, 1, 999); }
+        public override ushort PhysDef { get => (ushort)Utils.Clamp(((baseVit + 12) * level / 2 + TotalPhysDefInc) * PhysDefMultiplier, 1, 999); }
         public override ushort BlackMag { get => (ushort)Utils.Clamp((4 + baseInt + (baseChr / 4)) * level / 1.5 + TotalBlackMagInc, 1, 999); }
         public override ushort WhiteMag { get => (ushort)Utils.Clamp((4 + baseSpt + (baseChr / 4)) * level / 1.5 + TotalWhiteMagInc, 1, 999); }
-        public override ushort MagDef { get => (ushort)Utils.Clamp((4 + baseRes + (baseInt + baseSpt) / 4) * level / 1.5 + TotalMagDefInc, 1, 999); }
+        public override ushort MagDef { get => (ushort)Utils.Clamp(((4 + baseRes + (baseInt + baseSpt) / 4) * level / 1.5 + TotalMagDefInc) * MagDefMultiplier, 1, 999); }
         public override ushort HitRate { get => (ushort)Utils.Clamp(((6 + baseAgl + (baseLck / 2)) * level / 1.5 + TotalHitRateInc) * HitMultiplier, 1, 999); }
-        public override ushort Speed { get => (ushort)Utils.Clamp((6 + baseAgl + (baseStr / 2)) * level / 1.5 + TotalSpeedInc, 1, 999); }
+        public override ushort Speed { get => (ushort)Utils.Clamp(((6 + baseAgl + (baseStr / 2)) * level / 1.5 + TotalSpeedInc) * SpeedMultiplier, 1, 999); }
         public override ushort Charm { get => (ushort)Utils.Clamp((6 + baseChr + (baseLck / 2)) * level / 1.5 + TotalCharmInc, 1, 999); }
 
         public Weapon Weapon { get; }
@@ -60,6 +60,9 @@ namespace RPGExperiments.Entities
         public override double CritRate { get => (1 + baseLck / 16d) * Weapon.WType.Crit; }
         public override double HitMultiplier { get => Weapon.WType.Hit; }
         public override double PowerMultiplier { get => Weapon.WType.Pow; }
+        public override double PhysDefMultiplier { get => Armour.AType.PhysDef; }
+        public override double MagDefMultiplier { get => Armour.AType.MagDef; }
+        public override double SpeedMultiplier { get => Armour.AType.Mobility; }
 
         public BaseClass CharacterClass { get; }
 

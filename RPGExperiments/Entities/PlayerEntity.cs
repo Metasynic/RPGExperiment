@@ -24,7 +24,9 @@ namespace RPGExperiments.Entities
         public static PlayerEntity Freddie = new PlayerEntity("Freddie", (byte)(levelBase + 1),     9,  11, 8,  5,  6,  10, 12, 7,  CharacterClasses.Fighter, TestWeapons.DoubleBass, TestArmour.NiceSuit, TestAccessories.BowTie);
         public static PlayerEntity James = new PlayerEntity("James", (byte)(levelBase + 1),         6,  8,  11, 7,  12, 9,  6,  9,  CharacterClasses.WhiteMage, TestWeapons.IronStaff, TestArmour.WhiteRobes, TestAccessories.WhiteArmlet);
 
-        public static List<PlayerEntity> Entities = new List<PlayerEntity> { Kazuma, Aqua, Megumin, Darkness, Wiz, Yunyun, Chris, Sam, Lewis, Freddie, James };
+        public static PlayerEntity May = new PlayerEntity("May", (byte)(levelBase + 1),             6,  4,  12, 8,  5,  7,  16, 10,  CharacterClasses.Thief, TestWeapons.SteelDagger, TestArmour.ThiefCape, TestAccessories.CrimsonRibbon); 
+
+        public static List<PlayerEntity> Entities = new List<PlayerEntity> { Kazuma, Aqua, Megumin, Darkness, Wiz, Yunyun, Chris, Sam, Lewis, Freddie, James, May };
     }
 
     public class PlayerEntity : BaseEntity

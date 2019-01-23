@@ -18,7 +18,7 @@ namespace RPGExperiments.Equipment
         public static Weapon RedSword = new Weapon(WeaponTypes.Sword, new StatIncrease(         0,   0,   100, 0,   60,  80,  0,   0,   0,   0), "Red Sword");
         public static Weapon DoubleBass = new Weapon(WeaponTypes.Club, new StatIncrease(        0,   0,   240, 0,   0,   0,   0,   0,   0,   0), "Double Bass");
         public static Weapon SteelDagger = new Weapon(WeaponTypes.Dagger, new StatIncrease(     0,   0,   160, 0,   0,   0,   0,   0,   0,   0), "Steel Dagger");
-        public static Weapon Fists = new Weapon(WeaponTypes.Unarmed, new StatIncrease(          0,   0,   0,   0,   0,   0,   0,   0,   0,   0), "Fists");
+        public static Weapon MonkFists = new Weapon(WeaponTypes.Fists, new StatIncrease(        0,   0,   0,   0,   0,   0,   0,   0,   0,   0), "Monk Fists");
 
         public static List<Weapon> Weapons = new List<Weapon> { StaffOfRoses, CrimsonWoodRod, CrimsonWand, AzureStaff, IronStaff, MythrilShortsword, SteelBroadsword, CrystalDagger, KnifeOfSilence, RedSword, DoubleBass };
     }

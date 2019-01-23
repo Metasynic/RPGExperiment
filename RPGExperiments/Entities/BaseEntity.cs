@@ -4,6 +4,23 @@ using RPGExperiments.Spells;
 
 namespace RPGExperiments.Entities
 {
+    public struct DamageInfo
+    {
+        /* Critical and Glancing being true are mutually exclusive.
+         * The state where they are both true is handled as critical but should never happen. */       
+
+        public ushort Damage { get; }
+        public bool Critical { get; }
+        public bool Glancing { get; }
+
+        public DamageInfo(ushort d, bool c, bool g)
+        {
+            Damage = d;
+            Critical = c;
+            Glancing = g;
+        }
+    }
+
     public abstract class BaseEntity
     {
         /* Level goes from 1 to 99, naturally. */
@@ -57,8 +74,8 @@ namespace RPGExperiments.Entities
         public abstract ushort Speed { get; }
         public abstract ushort Charm { get; }
 
-        public virtual ushort TotalHealthInc { get; }
-        public virtual ushort TotalManaInc { get; }
+        public virtual double TotalHealthMult { get; }
+        public virtual double TotalManaMult { get; }
         public virtual ushort TotalPhysAtkInc { get; }
         public virtual ushort TotalPhysDefInc { get; }
         public virtual ushort TotalBlackMagInc { get; }
@@ -68,9 +85,9 @@ namespace RPGExperiments.Entities
         public virtual ushort TotalSpeedInc { get; }
         public virtual ushort TotalCharmInc { get; }
 
-        public virtual double CritMultiplier { get => 1d/32d; }
-        public virtual double HitMultiplier { get => 1.0d; }
-        public virtual double PowerMultiplier { get => 1.0d; }
+        public abstract double CritRate { get; }
+        public abstract double HitMultiplier { get; }
+        public abstract double PowerMultiplier { get; }
 
         public byte BaseStatTotal { get => (byte)(baseStr + baseVit + baseAgl + baseInt + baseSpt + baseRes + baseLck + baseChr); }
 
@@ -80,24 +97,24 @@ namespace RPGExperiments.Entities
             level = level_;
         }
 
-        public ushort PhysicalAttackDamage(BaseEntity defender, Random r)
+        public DamageInfo PhysicalAttackDamage(BaseEntity defender, Random r)
         {
             ushort damage = (ushort)Utils.Clamp(PhysAtk * 4 - defender.PhysDef + r.Next(1, (ushort)(3 + Math.Log(level) * baseLck)), 1, 9999);
 
             // TODO: Move printlines somewhere else
 
-            if (r.NextDouble() < CritMultiplier)
+            if (r.NextDouble() < CritRate)
             {
-                Console.WriteLine("Critical!");
-                return (ushort)(damage * 2);
+                /* Critical Hit */
+                return new DamageInfo((ushort)(damage * 2), true, false);
             }
-            else if (r.Next(defender.Speed) > HitRate)
+            if (r.Next(defender.Speed) > HitRate && r.Next(4) == 0)
             {
-                Console.WriteLine("Glancing...");
-                return (ushort)(damage / 2);
+                /* Glancing Hit */
+                return new DamageInfo((ushort)(damage / 2), false, true);
             }
-            else
-                return damage;
+            /* Normal Hit */
+            return new DamageInfo(damage, false, false);
         }
 
         public ushort CastSpell(BaseSpell spell, BaseEntity target, Random r)

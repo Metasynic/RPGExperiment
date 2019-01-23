@@ -31,8 +31,8 @@ namespace RPGExperiments.Entities
 
     public class PlayerEntity : BaseEntity
     {
-        public override ushort TotalHealthInc { get => (ushort)(Weapon.Increase.HealthInc + Armour.Increase.HealthInc + Accessory.Increase.HealthInc); }
-        public override ushort TotalManaInc { get => (ushort)(Weapon.Increase.ManaInc + Armour.Increase.ManaInc + Accessory.Increase.ManaInc); }
+        public override double TotalHealthMult { get => 1d + Weapon.Increase.HealthInc + Armour.Increase.HealthInc + Accessory.Increase.HealthInc; }
+        public override double TotalManaMult { get => 1d + Weapon.Increase.ManaInc + Armour.Increase.ManaInc + Accessory.Increase.ManaInc; }
         public override ushort TotalPhysAtkInc { get => (ushort)(Weapon.Increase.PhysAtkInc + Armour.Increase.PhysAtkInc + Accessory.Increase.PhysAtkInc); }
         public override ushort TotalPhysDefInc { get => (ushort)(Weapon.Increase.PhysDefInc + Armour.Increase.PhysDefInc + Accessory.Increase.PhysDefInc); }
         public override ushort TotalBlackMagInc { get => (ushort)(Weapon.Increase.BlackMagInc + Armour.Increase.BlackMagInc + Accessory.Increase.BlackMagInc); }
@@ -42,14 +42,14 @@ namespace RPGExperiments.Entities
         public override ushort TotalSpeedInc { get => (ushort)(Weapon.Increase.SpeedInc + Armour.Increase.SpeedInc + Accessory.Increase.SpeedInc); }
         public override ushort TotalCharmInc { get => (ushort)(Weapon.Increase.CharmInc + Armour.Increase.CharmInc + Accessory.Increase.CharmInc); }
 
-        public override ushort MaxHealth { get => (ushort)Utils.Clamp((12 + baseVit) * level * 7 + baseLck * Math.Log(level) + TotalHealthInc, 1, 9999); }
-        public override ushort MaxMana { get => (ushort)Utils.Clamp((baseInt + baseSpt + baseRes / 2) * level / 1.5 + baseLck * Math.Log(level) + TotalManaInc, 1, 999); }
+        public override ushort MaxHealth { get => (ushort)Utils.Clamp(((12 + baseVit) * level * 7 + baseLck * Math.Log(level)) * TotalHealthMult, 1, 9999); }
+        public override ushort MaxMana { get => (ushort)Utils.Clamp(((baseInt + baseSpt + baseRes / 2) * level / 1.5 + baseLck * Math.Log(level)) * TotalManaMult, 1, 999); }
         public override ushort PhysAtk { get => (ushort)Utils.Clamp(((baseStr + 12) * level / 2 + TotalPhysAtkInc) * PowerMultiplier, 1, 999); }
         public override ushort PhysDef { get => (ushort)Utils.Clamp((baseVit + 12) * level / 2 + TotalPhysDefInc, 1, 999); }
         public override ushort BlackMag { get => (ushort)Utils.Clamp((4 + baseInt + (baseChr / 4)) * level / 1.5 + TotalBlackMagInc, 1, 999); }
         public override ushort WhiteMag { get => (ushort)Utils.Clamp((4 + baseSpt + (baseChr / 4)) * level / 1.5 + TotalWhiteMagInc, 1, 999); }
         public override ushort MagDef { get => (ushort)Utils.Clamp((4 + baseRes + (baseInt + baseSpt) / 4) * level / 1.5 + TotalMagDefInc, 1, 999); }
-        public override ushort HitRate { get => (ushort)Utils.Clamp((6 + baseAgl + (baseLck / 2)) * level / 1.5 + TotalHitRateInc, 1, 999); }
+        public override ushort HitRate { get => (ushort)Utils.Clamp(((6 + baseAgl + (baseLck / 2)) * level / 1.5 + TotalHitRateInc) * HitMultiplier, 1, 999); }
         public override ushort Speed { get => (ushort)Utils.Clamp((6 + baseAgl + (baseStr / 2)) * level / 1.5 + TotalSpeedInc, 1, 999); }
         public override ushort Charm { get => (ushort)Utils.Clamp((6 + baseChr + (baseLck / 2)) * level / 1.5 + TotalCharmInc, 1, 999); }
 
@@ -57,9 +57,9 @@ namespace RPGExperiments.Entities
         public Armour Armour { get; }
         public Accessory Accessory { get; }
 
-        public override double CritMultiplier { get => getCritMult(); }
-        public override double HitMultiplier { get => getHitMult(); }
-        public override double PowerMultiplier { get => getPowerMult(); }
+        public override double CritRate { get => (1 + baseLck / 16d) * Weapon.WType.Crit; }
+        public override double HitMultiplier { get => Weapon.WType.Hit; }
+        public override double PowerMultiplier { get => Weapon.WType.Pow; }
 
         public BaseClass CharacterClass { get; }
 
@@ -78,25 +78,6 @@ namespace RPGExperiments.Entities
             Armour = armour_;
             Accessory = accessory_;
             spells = new Dictionary<BaseSpell, byte>();
-        }
-
-        private double getCritMult()
-        {
-            if (Weapon != null)
-                return Weapon.WType.crit;
-            return base.CritMultiplier;
-        }
-        private double getHitMult()
-        {
-            if (Weapon != null)
-                return Weapon.WType.hit;
-            return base.HitMultiplier;
-        }
-        private double getPowerMult()
-        {
-            if (Weapon != null)
-                return Weapon.WType.pow;
-            return base.PowerMultiplier;
         }
     }
 }

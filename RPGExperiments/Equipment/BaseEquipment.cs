@@ -4,9 +4,10 @@ namespace RPGExperiments.Equipment
 {
     public struct StatIncrease
     {
-        public readonly ushort HealthInc, ManaInc, PhysAtkInc, PhysDefInc, BlackMagInc, WhiteMagInc, MagDefInc, HitRateInc, SpeedInc, CharmInc;
+        public readonly double HealthInc, ManaInc;
+        public readonly ushort PhysAtkInc, PhysDefInc, BlackMagInc, WhiteMagInc, MagDefInc, HitRateInc, SpeedInc, CharmInc;
 
-        public StatIncrease(ushort healthInc, ushort manaInc, ushort physAtkInc, ushort physDefInc, ushort blackMagInc, ushort whiteMagInc, ushort magDefInc, ushort hitRateInc, ushort speedInc, ushort charmInc)
+        public StatIncrease(double healthInc, double manaInc, ushort physAtkInc, ushort physDefInc, ushort blackMagInc, ushort whiteMagInc, ushort magDefInc, ushort hitRateInc, ushort speedInc, ushort charmInc)
         {
             HealthInc = healthInc;
             ManaInc = manaInc;
@@ -29,7 +30,8 @@ namespace RPGExperiments.Equipment
          * 121-180: Uncommon, well-crafted weapons such as monster drops.
          * 181-240: Rare and specialist/magical weapons, expensive to obtain.
          * 241-300: One-of-a-kind equipment, such as boss drops. 
-         * [NB: Divide all by 3 for accessory increases, which should be capped at 100.] */
+         * [NB: Divide all by 3 for accessory increases, which should be capped at 100.] 
+         * Also, HP and MP increases represent a multiplicative factor to be added to 1. */
 
         protected StatIncrease increase;
         public StatIncrease Increase { get => increase; }

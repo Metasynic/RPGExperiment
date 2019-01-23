@@ -14,7 +14,12 @@ namespace RPGExperiments
 
         static void printPhysicalAttack(BaseEntity attacker, BaseEntity defender, Random r)
         {
-            Console.WriteLine(attacker.Name + " does " + attacker.PhysicalAttackDamage(defender, r) + " damage to " + defender.Name + ".");
+            DamageInfo damageInfo = attacker.PhysicalAttackDamage(defender, r);
+            if (damageInfo.Critical)
+                Console.WriteLine("Critical Hit:");
+            else if (damageInfo.Glancing)
+                Console.WriteLine("Glancing Blow:");
+            Console.WriteLine(attacker.Name + " does " + damageInfo.Damage + " damage to " + defender.Name + ".");
         }
 
         static void printSpell(BaseEntity attacker, BaseEntity defender, Random r) {

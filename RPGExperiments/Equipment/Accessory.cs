@@ -11,7 +11,7 @@ namespace RPGExperiments.Equipment
         public static Accessory LichBadge = new Accessory(new StatIncrease(      0,   0,   0,   0,   20,  20,  20,  0,   0,   0), "Lich Badge");
         public static Accessory CrimsonRibbon = new Accessory(new StatIncrease(  0,   0,   0,   0,   60,  0,   0,   0,   0,   0), "Crimson Ribbon");
         public static Accessory RuneAmulet = new Accessory(new StatIncrease(     0,   0,   0,   40,  0,   0,   40,  0,   0,   0), "Rune Amulet");
-        public static Accessory AzureCape = new Accessory(new StatIncrease(      0,   0.1d,0,   0,   0,   0,   0,   0,   0,   0), "Azure Cape");
+        public static Accessory AzureCape = new Accessory(new StatIncrease(      0,   0.1, 0,   0,   0,   0,   0,   0,   0,   0), "Azure Cape");
         public static Accessory RedGem = new Accessory(new StatIncrease(         0,   0,   20,  0,   20,  20,  0,   0,   0,   0), "Red Gem");
         public static Accessory BowTie = new Accessory(new StatIncrease(         0,   0,   0,   0,   0,   0,   0,   0,   0,   60), "Bow Tie");
         public static Accessory WhiteArmlet = new Accessory(new StatIncrease(    0,   0,   0,   0,   0,   40,  0,   0,   0,   0), "White Armlet");

@@ -9,7 +9,7 @@ namespace RPGExperiments
     {
         static void printCharacter(BaseEntity b)
         {
-            Console.WriteLine(b.Name.PadRight(9) + " Lv: " + b.Level + " BST: " + b.BaseStatTotal + " HP: " + b.MaxHealth + " MP: " + b.MaxMana + " Atk: " + b.PhysAtk + " Def: " + b.PhysDef + " BMag: " + b.BlackMag + " WMag: " + b.WhiteMag + " MDef: " + b.MagDef + " Hit: " + b.HitRate + " Spd: " + b.Speed + " Crm: " + b.Charm + " Crit: " + Math.Round(b.CritRate * 100, 1) + "%");
+            Console.WriteLine(b.Name.PadRight(9) + " Lv: " + b.Level + " BST: " + b.BaseStatTotal + " HP: " + b.MaxHealth + " MP: " + b.MaxMana + " Atk: " + b.PhysAtk + " Def: " + b.PhysDef + " BMag: " + b.BlackMag + " WMag: " + b.WhiteMag + " MDef: " + b.MagDef + " Hit: " + b.HitRate + " Spd: " + b.Speed + " Crm: " + b.Charm + " FST: " + (b.PhysAtk + b.PhysDef + b.BlackMag + b.WhiteMag + b.MagDef + b.HitRate + b.Speed + b.Charm) + " Crit: " + Math.Round(b.CritRate * 100, 1) + "%");
         }
 
         static void printPhysicalAttack(BaseEntity attacker, BaseEntity defender, Random r)

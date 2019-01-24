@@ -21,7 +21,7 @@ namespace RPGExperiments.Entities
 
         public static PlayerEntity Sam = new PlayerEntity("Sam", (byte)(levelBase + 1),             7,  6,  9,  12, 10, 11, 6,  7,  CharacterClasses.BlueMage, TestWeapons.AzureStaff, TestArmour.AzureCloak, TestAccessories.AzureCape);
         public static PlayerEntity Lewis = new PlayerEntity("Lewis", (byte)(levelBase + 1),         9,  7,  7,  10, 12, 10, 4,  9,  CharacterClasses.RedMage, TestWeapons.RedSword, TestArmour.SteelLight, TestAccessories.RedGem);
-        public static PlayerEntity Freddie = new PlayerEntity("Freddie", (byte)(levelBase + 1),     11, 9,  8,  5,  6,  10, 12, 7,  CharacterClasses.Monk, TestWeapons.MonkFists, TestArmour.NiceSuit, TestAccessories.BowTie);
+        public static PlayerEntity Freddie = new PlayerEntity("Freddie", (byte)(levelBase + 1),     11, 9,  8,  5,  6,  10, 12, 7,  CharacterClasses.Monk, TestWeapons.MonkFists, TestArmour.MonkGi, TestAccessories.BowTie);
         public static PlayerEntity James = new PlayerEntity("James", (byte)(levelBase + 1),         6,  8,  11, 7,  12, 9,  6,  9,  CharacterClasses.WhiteMage, TestWeapons.IronStaff, TestArmour.WhiteRobes, TestAccessories.WhiteArmlet);
 
         public static PlayerEntity May = new PlayerEntity("May", (byte)(levelBase + 1),             6,  4,  12, 8,  5,  7,  16, 10, CharacterClasses.Thief, TestWeapons.SteelDagger, TestArmour.ThiefCape, TestAccessories.CrimsonRibbon); 

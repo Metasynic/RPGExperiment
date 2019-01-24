@@ -109,7 +109,7 @@ namespace RPGExperiments.Entities
                 /* Critical Hit */
                 return new DamageInfo((ushort)(damage * 2), true, false);
             }
-            if (r.Next(defender.Speed) > HitRate && r.Next(2) == 0)
+            if (r.Next(defender.Speed) > HitRate)
             {
                 /* Glancing Hit */
                 return new DamageInfo((ushort)(damage / 2), false, true);

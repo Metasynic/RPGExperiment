@@ -7,9 +7,9 @@ namespace RPGExperiments.Equipment
         public static readonly ArmourType LightArmour = new ArmourType(1.1, 1.0, 0.8);
         public static readonly ArmourType HeavyArmour = new ArmourType(1.2, 1.0, 0.6);
         public static readonly ArmourType Gi = new ArmourType(1.4, 1.0, 1.0);
-        public static readonly ArmourType LightOutfit = new ArmourType(0.9, 0.9, 1.2);
-        public static readonly ArmourType MediumOutfit = new ArmourType(1.0, 1.0, 1.0);
-        public static readonly ArmourType LightRobes = new ArmourType(1.0, 1.1, 0.9);
+        public static readonly ArmourType LightOutfit = new ArmourType(1.05, 1.05, 1.0);
+        public static readonly ArmourType MediumOutfit = new ArmourType(1.1, 1.1, 0.9);
+        public static readonly ArmourType LightRobes = new ArmourType(1.0, 1.1, 1.0);
         public static readonly ArmourType HeavyRobes = new ArmourType(1.0, 1.2, 0.8);
     }
 

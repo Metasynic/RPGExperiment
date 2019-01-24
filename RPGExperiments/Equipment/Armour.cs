@@ -73,7 +73,7 @@ namespace RPGExperiments.Equipment
         public static Armour HeavyStellarWovenRobes = new Armour(ArmourTypes.HeavyRobes, new StatIncrease(0,   0,   0,   240, 0,   0,   240, 0,   0,   0), "Heavy Stellar-woven Robes");
         public static List<Armour> HeavyRobes = new List<Armour> { HeavyLeatherWovenRobes, HeavyIronWovenRobes, HeavySteelWovenRobes, HeavyMythrilWovenRobes, HeavyJadeWovenRobes, HeavyCrystalWovenRobes, HeavyAdamantWovenRobes, HeavyStellarWovenRobes };
 
-        public static Armour MonkGi = new Armour(ArmourTypes.Gi, new StatIncrease(                  0,   0,   0,   0,   0,   0,   0,   0,   0,   0), "Monk Gi");
+        public static Armour MonkGi = new Armour(ArmourTypes.Gi, new StatIncrease(                        0,   0,   0,   0,   0,   0,   0,   0,   0,   0), "Monk Gi");
     }
 
     public class Armour : BaseEquipment

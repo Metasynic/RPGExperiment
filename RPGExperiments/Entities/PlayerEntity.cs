@@ -10,21 +10,21 @@ namespace RPGExperiments.Entities
     {
         /* Player base stats should sum to between 65 and 69. */
         static byte levelBase = 50;                                                              /* STR VIT AGL INT SPR RES LCK CHR */
-        public static PlayerEntity Kazuma = new PlayerEntity("Kazuma", (byte)(levelBase + 4),       6,  7,  13, 9,  4,  9,  14, 6,  CharacterClasses.Adventurer, TestWeapons.MythrilShortsword, TestArmour.ThiefCape, TestAccessories.StealSash);
-        public static PlayerEntity Aqua = new PlayerEntity("Aqua", (byte)(levelBase + 4),           7,  8,  6,  4,  16, 13, 1,  14, CharacterClasses.WhiteMage, TestWeapons.StaffOfRoses, TestArmour.GoddessSuit, TestAccessories.GoddessRibbon);
-        public static PlayerEntity Megumin = new PlayerEntity("Megumin", (byte)(levelBase + 5),     4,  3,  9,  14, 6,  10, 11, 11, CharacterClasses.BlackMage, TestWeapons.CrimsonWoodRod, TestArmour.CrimsonHat, TestAccessories.CrimsonEyepatch);
-        public static PlayerEntity Darkness = new PlayerEntity("Darkness", (byte)(levelBase + 5),   13, 14, 2,  5,  9,  11, 5,  8,  CharacterClasses.Paladin, TestWeapons.SteelBroadsword, TestArmour.CrusaderHeavy, TestAccessories.PaladinBadge);
+        public static PlayerEntity Kazuma = new PlayerEntity("Kazuma", (byte)(levelBase + 4),       6,  7,  13, 9,  4,  9,  14, 6,  CharacterClasses.Adventurer, TestWeapons.MythrilShortsword, TestArmour.LightMythrilBoundOutfit, TestAccessories.StealSash);
+        public static PlayerEntity Aqua = new PlayerEntity("Aqua", (byte)(levelBase + 4),           7,  8,  6,  4,  16, 13, 1,  14, CharacterClasses.WhiteMage, TestWeapons.StellarStaff, TestArmour.MediumCrystalBoundOutfit, TestAccessories.GoddessRibbon);
+        public static PlayerEntity Megumin = new PlayerEntity("Megumin", (byte)(levelBase + 5),     4,  3,  9,  14, 6,  10, 11, 11, CharacterClasses.BlackMage, TestWeapons.JadeRod, TestArmour.LightMythrilWovenRobes, TestAccessories.CrimsonEyepatch);
+        public static PlayerEntity Darkness = new PlayerEntity("Darkness", (byte)(levelBase + 5),   13, 14, 2,  5,  9,  11, 5,  8,  CharacterClasses.Paladin, TestWeapons.MythrilBroadsword, TestArmour.HeavyAdamantArmour, TestAccessories.PaladinBadge);
 
-        public static PlayerEntity Wiz = new PlayerEntity("Wiz", (byte)(levelBase + 8),             10, 10, 5,  6,  12, 7,  9,  7,  CharacterClasses.Adventurer, TestWeapons.CrystalDagger, TestArmour.PurpleRobes, TestAccessories.LichBadge);
-        public static PlayerEntity Yunyun = new PlayerEntity("Yunyun", (byte)(levelBase + 2),       9,  7,  6,  14, 8,  10, 5,  7,  CharacterClasses.BlackMage, TestWeapons.CrimsonWand, TestArmour.CrimsonUniform, TestAccessories.CrimsonRibbon);
-        public static PlayerEntity Chris = new PlayerEntity("Chris", (byte)(levelBase + 2),         6,  5,  14, 9,  6,  5,  16, 8,  CharacterClasses.Thief, TestWeapons.KnifeOfSilence, TestArmour.ThiefSuit, TestAccessories.RuneAmulet);
+        public static PlayerEntity Wiz = new PlayerEntity("Wiz", (byte)(levelBase + 8),             10, 10, 5,  6,  12, 7,  9,  7,  CharacterClasses.Geomancer, TestWeapons.CrystalDagger, TestArmour.HeavyAdamantWovenRobes, TestAccessories.LichBadge);
+        public static PlayerEntity Yunyun = new PlayerEntity("Yunyun", (byte)(levelBase + 2),       9,  7,  6,  14, 8,  10, 5,  7,  CharacterClasses.BlackMage, TestWeapons.JadeRod, TestArmour.MediumJadeBoundOutfit, TestAccessories.CrimsonRibbon);
+        public static PlayerEntity Chris = new PlayerEntity("Chris", (byte)(levelBase + 2),         6,  5,  14, 9,  6,  5,  16, 8,  CharacterClasses.Thief, TestWeapons.StellarDagger, TestArmour.LightAdamantBoundOutfit, TestAccessories.RuneAmulet);
 
-        public static PlayerEntity Sam = new PlayerEntity("Sam", (byte)(levelBase + 1),             7,  6,  9,  12, 10, 11, 6,  7,  CharacterClasses.BlueMage, TestWeapons.AzureStaff, TestArmour.AzureCloak, TestAccessories.AzureCape);
-        public static PlayerEntity Lewis = new PlayerEntity("Lewis", (byte)(levelBase + 1),         9,  7,  7,  10, 12, 10, 4,  9,  CharacterClasses.RedMage, TestWeapons.RedSword, TestArmour.SteelLight, TestAccessories.RedGem);
+        public static PlayerEntity Sam = new PlayerEntity("Sam", (byte)(levelBase + 1),             7,  6,  9,  12, 10, 11, 6,  7,  CharacterClasses.BlueMage, TestWeapons.MythrilRod, TestArmour.LightJadeWovenRobes, TestAccessories.AzureCape);
+        public static PlayerEntity Lewis = new PlayerEntity("Lewis", (byte)(levelBase + 1),         9,  7,  7,  10, 12, 10, 4,  9,  CharacterClasses.RedMage, TestWeapons.JadeShortsword, TestArmour.LightSteelArmour, TestAccessories.RedGem);
         public static PlayerEntity Freddie = new PlayerEntity("Freddie", (byte)(levelBase + 1),     11, 9,  8,  5,  6,  10, 12, 7,  CharacterClasses.Monk, TestWeapons.MonkFists, TestArmour.MonkGi, TestAccessories.BowTie);
-        public static PlayerEntity James = new PlayerEntity("James", (byte)(levelBase + 1),         6,  8,  11, 7,  12, 9,  6,  9,  CharacterClasses.WhiteMage, TestWeapons.IronStaff, TestArmour.WhiteRobes, TestAccessories.WhiteArmlet);
+        public static PlayerEntity James = new PlayerEntity("James", (byte)(levelBase + 1),         6,  8,  11, 7,  12, 9,  6,  9,  CharacterClasses.WhiteMage, TestWeapons.MythrilStaff, TestArmour.HeavyMythrilWovenRobes, TestAccessories.WhiteArmlet);
 
-        public static PlayerEntity May = new PlayerEntity("May", (byte)(levelBase + 1),             6,  4,  12, 8,  5,  7,  16, 10, CharacterClasses.Thief, TestWeapons.SteelDagger, TestArmour.ThiefCape, TestAccessories.CrimsonRibbon); 
+        public static PlayerEntity May = new PlayerEntity("May", (byte)(levelBase + 1),             6,  4,  12, 8,  5,  7,  16, 10, CharacterClasses.Thief, TestWeapons.SteelDagger, TestArmour.LightJadeBoundOutfit, TestAccessories.CrimsonRibbon); 
 
         public static List<PlayerEntity> Entities = new List<PlayerEntity> { Kazuma, Aqua, Megumin, Darkness, Wiz, Yunyun, Chris, Sam, Lewis, Freddie, James, May };
     }

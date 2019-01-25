@@ -72,8 +72,8 @@ namespace RPGExperiments.Entities
         public ushort TotalSpeedInc { get => (ushort)(Weapon.Increase.SpeedInc + Armour.Increase.SpeedInc + Accessory.Increase.SpeedInc); }
         public ushort TotalCharmInc { get => (ushort)(Weapon.Increase.CharmInc + Armour.Increase.CharmInc + Accessory.Increase.CharmInc); }
 
-        public override int MaxHealth { get => (ushort)Utils.Clamp(((12 + baseVit) * level * 7 + baseLck * Math.Log(level)) * TotalHealthMult, 1, 9999); }
-        public override int MaxMana { get => (ushort)Utils.Clamp(((baseInt + baseSpt + baseRes / 2) * level / 1.5 + baseLck * Math.Log(level)) * TotalManaMult, 1, 999); }
+        public override int MaxHealth { get => (int)Utils.Clamp(((12 + baseVit) * level * 7 + baseLck * Math.Log(level)) * TotalHealthMult, 1, 9999); }
+        public override int MaxMana { get => (int)Utils.Clamp(((baseInt + baseSpt + baseRes / 2) * level / 1.5 + baseLck * Math.Log(level)) * TotalManaMult, 1, 999); }
         public override ushort PhysAtk { get => (ushort)Utils.Clamp(((baseStr + 12) * level / 2 + TotalPhysAtkInc) * PowerMultiplier, 1, 999); }
         public override ushort PhysDef { get => (ushort)Utils.Clamp(((baseVit + 12) * level / 2 + TotalPhysDefInc) * PhysDefMultiplier, 1, 999); }
         public override ushort BlackMag { get => (ushort)Utils.Clamp((4 + baseInt + (baseChr / 4)) * level / 1.5 + TotalBlackMagInc, 1, 999); }
@@ -89,6 +89,8 @@ namespace RPGExperiments.Entities
 
         public override double CritRate { get => (1 + baseLck / 16d) * Weapon.WType.Crit; }
 
+        public byte BaseStatTotal { get => (byte)(baseStr + baseVit + baseAgl + baseInt + baseSpt + baseRes + baseLck + baseChr); }
+
         public double HitMultiplier { get => Weapon.WType.Hit; }
         public double PowerMultiplier { get => Weapon.WType.Pow; }
         public double PhysDefMultiplier { get => Armour.AType.PhysDef; }
@@ -96,8 +98,6 @@ namespace RPGExperiments.Entities
         public double SpeedMultiplier { get => Armour.AType.Mobility; }
 
         public BaseClass CharacterClass { get; }
-
-        public byte BaseStatTotal { get => (byte)(baseStr + baseVit + baseAgl + baseInt + baseSpt + baseRes + baseLck + baseChr); }
 
         public PlayerEntity(string name_, byte level_, byte str_, byte vit_, byte agl_, byte int_, byte spt_, byte res_, byte lck_, byte chr_, BaseClass characterClass_, Weapon weapon_, Armour armour_, Accessory accessory_) : base(name_, level_)
         {

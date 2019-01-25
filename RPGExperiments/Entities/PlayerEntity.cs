@@ -31,19 +31,49 @@ namespace RPGExperiments.Entities
 
     public class PlayerEntity : BaseEntity
     {
-        public override double TotalHealthMult { get => 1d + Weapon.Increase.HealthInc + Armour.Increase.HealthInc + Accessory.Increase.HealthInc; }
-        public override double TotalManaMult { get => 1d + Weapon.Increase.ManaInc + Armour.Increase.ManaInc + Accessory.Increase.ManaInc; }
-        public override ushort TotalPhysAtkInc { get => (ushort)(Weapon.Increase.PhysAtkInc + Armour.Increase.PhysAtkInc + Accessory.Increase.PhysAtkInc); }
-        public override ushort TotalPhysDefInc { get => (ushort)(Weapon.Increase.PhysDefInc + Armour.Increase.PhysDefInc + Accessory.Increase.PhysDefInc); }
-        public override ushort TotalBlackMagInc { get => (ushort)(Weapon.Increase.BlackMagInc + Armour.Increase.BlackMagInc + Accessory.Increase.BlackMagInc); }
-        public override ushort TotalWhiteMagInc { get => (ushort)(Weapon.Increase.WhiteMagInc + Armour.Increase.WhiteMagInc + Accessory.Increase.WhiteMagInc); }
-        public override ushort TotalMagDefInc { get => (ushort)(Weapon.Increase.MagDefInc + Armour.Increase.MagDefInc + Accessory.Increase.MagDefInc); }
-        public override ushort TotalHitRateInc { get => (ushort)(Weapon.Increase.HitRateInc + Armour.Increase.HitRateInc + Accessory.Increase.HitRateInc); }
-        public override ushort TotalSpeedInc { get => (ushort)(Weapon.Increase.SpeedInc + Armour.Increase.SpeedInc + Accessory.Increase.SpeedInc); }
-        public override ushort TotalCharmInc { get => (ushort)(Weapon.Increase.CharmInc + Armour.Increase.CharmInc + Accessory.Increase.CharmInc); }
+        /* Base stats vary from 1 to 16 for simplicity.
+         * 1-2: Abysmal.
+         * 3-4: Really bad.
+         * 5-6: Weak points.
+         * 7-8: Not great.
+         * 9-10: Decent.
+         * 11-12: Pretty good.
+         * 13-14: Very talented.
+         * 15-16: Godlike. 
+         */
 
-        public override ushort MaxHealth { get => (ushort)Utils.Clamp(((12 + baseVit) * level * 7 + baseLck * Math.Log(level)) * TotalHealthMult, 1, 9999); }
-        public override ushort MaxMana { get => (ushort)Utils.Clamp(((baseInt + baseSpt + baseRes / 2) * level / 1.5 + baseLck * Math.Log(level)) * TotalManaMult, 1, 999); }
+        /* The base stats are as follows:
+         * Strength (STR) - how strong you are, determines physical attack damage.
+         * Vitality (VIT) - how tough and resistant to pain you are, affects health and physical defence.
+         * Agility (AGL) - how fast or nimble you are, affects speed and hit rate.
+         * Intelligence (INT) - how logical or clever you are, affects black magic and mana.
+         * Spirit (SPR) - how compassionate and thoughtful you are, affects white magic and mana.
+         * Resistance (RES) - how much willpower and conviction you have, affects magic defence and mana.
+         * Luck (LCK) - how much fortune happens to favour you, affects hit rate and charm.
+         * Charisma (CHR) - how friendly and personable you are to others, affects charm and magic.
+         */
+        protected byte baseStr;
+        protected byte baseVit;
+        protected byte baseAgl;
+        protected byte baseInt;
+        protected byte baseSpt;
+        protected byte baseRes;
+        protected byte baseLck;
+        protected byte baseChr;
+
+        public double TotalHealthMult { get => 1d + Weapon.Increase.HealthInc + Armour.Increase.HealthInc + Accessory.Increase.HealthInc; }
+        public double TotalManaMult { get => 1d + Weapon.Increase.ManaInc + Armour.Increase.ManaInc + Accessory.Increase.ManaInc; }
+        public ushort TotalPhysAtkInc { get => (ushort)(Weapon.Increase.PhysAtkInc + Armour.Increase.PhysAtkInc + Accessory.Increase.PhysAtkInc); }
+        public ushort TotalPhysDefInc { get => (ushort)(Weapon.Increase.PhysDefInc + Armour.Increase.PhysDefInc + Accessory.Increase.PhysDefInc); }
+        public ushort TotalBlackMagInc { get => (ushort)(Weapon.Increase.BlackMagInc + Armour.Increase.BlackMagInc + Accessory.Increase.BlackMagInc); }
+        public ushort TotalWhiteMagInc { get => (ushort)(Weapon.Increase.WhiteMagInc + Armour.Increase.WhiteMagInc + Accessory.Increase.WhiteMagInc); }
+        public ushort TotalMagDefInc { get => (ushort)(Weapon.Increase.MagDefInc + Armour.Increase.MagDefInc + Accessory.Increase.MagDefInc); }
+        public ushort TotalHitRateInc { get => (ushort)(Weapon.Increase.HitRateInc + Armour.Increase.HitRateInc + Accessory.Increase.HitRateInc); }
+        public ushort TotalSpeedInc { get => (ushort)(Weapon.Increase.SpeedInc + Armour.Increase.SpeedInc + Accessory.Increase.SpeedInc); }
+        public ushort TotalCharmInc { get => (ushort)(Weapon.Increase.CharmInc + Armour.Increase.CharmInc + Accessory.Increase.CharmInc); }
+
+        public override int MaxHealth { get => (ushort)Utils.Clamp(((12 + baseVit) * level * 7 + baseLck * Math.Log(level)) * TotalHealthMult, 1, 9999); }
+        public override int MaxMana { get => (ushort)Utils.Clamp(((baseInt + baseSpt + baseRes / 2) * level / 1.5 + baseLck * Math.Log(level)) * TotalManaMult, 1, 999); }
         public override ushort PhysAtk { get => (ushort)Utils.Clamp(((baseStr + 12) * level / 2 + TotalPhysAtkInc) * PowerMultiplier, 1, 999); }
         public override ushort PhysDef { get => (ushort)Utils.Clamp(((baseVit + 12) * level / 2 + TotalPhysDefInc) * PhysDefMultiplier, 1, 999); }
         public override ushort BlackMag { get => (ushort)Utils.Clamp((4 + baseInt + (baseChr / 4)) * level / 1.5 + TotalBlackMagInc, 1, 999); }
@@ -58,13 +88,16 @@ namespace RPGExperiments.Entities
         public Accessory Accessory { get; }
 
         public override double CritRate { get => (1 + baseLck / 16d) * Weapon.WType.Crit; }
-        public override double HitMultiplier { get => Weapon.WType.Hit; }
-        public override double PowerMultiplier { get => Weapon.WType.Pow; }
-        public override double PhysDefMultiplier { get => Armour.AType.PhysDef; }
-        public override double MagDefMultiplier { get => Armour.AType.MagDef; }
-        public override double SpeedMultiplier { get => Armour.AType.Mobility; }
+
+        public double HitMultiplier { get => Weapon.WType.Hit; }
+        public double PowerMultiplier { get => Weapon.WType.Pow; }
+        public double PhysDefMultiplier { get => Armour.AType.PhysDef; }
+        public double MagDefMultiplier { get => Armour.AType.MagDef; }
+        public double SpeedMultiplier { get => Armour.AType.Mobility; }
 
         public BaseClass CharacterClass { get; }
+
+        public byte BaseStatTotal { get => (byte)(baseStr + baseVit + baseAgl + baseInt + baseSpt + baseRes + baseLck + baseChr); }
 
         public PlayerEntity(string name_, byte level_, byte str_, byte vit_, byte agl_, byte int_, byte spt_, byte res_, byte lck_, byte chr_, BaseClass characterClass_, Weapon weapon_, Armour armour_, Accessory accessory_) : base(name_, level_)
         {
@@ -81,6 +114,37 @@ namespace RPGExperiments.Entities
             Armour = armour_;
             Accessory = accessory_;
             spells = new Dictionary<BaseSpell, byte>();
+        }
+
+        public override DamageInfo PhysicalAttackDamage(BaseEntity defender, Random r)
+        {
+            ushort damage = (ushort)Utils.Clamp(PhysAtk * 4 - defender.PhysDef + r.Next(1, (ushort)(3 + Math.Log(level) * baseLck)), 1, 9999);
+
+            if (r.NextDouble() < CritRate)
+            {
+                /* Critical Hit */
+                return new DamageInfo((ushort)(damage * 2), true, false);
+            }
+            if (r.Next(defender.Speed) > HitRate && r.Next(2) == 0)
+            {
+                /* Glancing Hit */
+                return new DamageInfo((ushort)(damage / 2), false, true);
+            }
+            /* Normal Hit */
+            return new DamageInfo(damage, false, false);
+        }
+
+        public override ushort CastSpell(BaseSpell spell, BaseEntity target, Random r)
+        {
+            if (!spells.ContainsKey(spell))
+                throw new Exception(name + " called CastSpell() with spell " + spell.Name + ", which is not in their spell list.");
+
+            if (spell.GetType() == typeof(AttackSpell))
+                return ((AttackSpell)spell).AttackDamage(this, target, r, (AttackSpell)spell, spells[spell], baseLck);
+            if (spell.GetType() == typeof(HealSpell))
+                return ((HealSpell)spell).HealAmount(this, target, r, (HealSpell)spell, spells[spell], baseLck);
+
+            throw new Exception(name + " tried to cast a spell " + spell.Name + " with unknown type.");
         }
     }
 }

@@ -49,10 +49,14 @@ namespace RPGExperiments
         {
             byte spellLevel = 8;
             TestPlayers.Aqua.AddSpells(TestPlayers.Aqua.CharacterClass.AllowedSpells, spellLevel);
-            TestPlayers.Megumin.AddSpell(TestSpells.Explosion, spellLevel);
+            TestPlayers.Megumin.AddSpell(TestAttackSpells.Explosion, spellLevel);
             TestPlayers.Yunyun.AddSpells(TestPlayers.Yunyun.CharacterClass.AllowedSpells, spellLevel);
             TestPlayers.Sam.AddSpells(TestPlayers.Sam.CharacterClass.AllowedSpells, spellLevel);
             TestPlayers.Lewis.AddSpells(TestPlayers.Lewis.CharacterClass.AllowedSpells, spellLevel);
+            TestEnemies.Erlant.AddSpell(TestAttackSpells.Comet, spellLevel);
+            TestEnemies.Erlant.AddSpell(TestAttackSpells.Meteor, spellLevel);
+            TestEnemies.Erlant.AddSpell(TestAttackSpells.Starfall, spellLevel);
+            TestEnemies.Erlant.AddSpell(TestAttackSpells.Nova, spellLevel);
 
             foreach (BaseEntity entity in TestPlayers.Entities)
             {
@@ -63,8 +67,8 @@ namespace RPGExperiments
             for(int i = 0; i < 5; i++)
             {
                 printAttack(TestPlayers.Entities[r.Next(0, TestPlayers.Entities.Count)], TestPlayers.Entities[r.Next(0, TestPlayers.Entities.Count)], r);
-                printAttack(TestPlayers.Entities[r.Next(0, TestPlayers.Entities.Count)], TestEnemies.EvilThing, r);
-                printAttack(TestEnemies.EvilThing, TestPlayers.Entities[r.Next(0, TestPlayers.Entities.Count)], r);
+                printAttack(TestPlayers.Entities[r.Next(0, TestPlayers.Entities.Count)], TestEnemies.Erlant, r);
+                printAttack(TestEnemies.Erlant, TestPlayers.Entities[r.Next(0, TestPlayers.Entities.Count)], r);
             }
 
             Console.ReadKey();

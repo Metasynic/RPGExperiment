@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
 using RPGExperiments.Equipment;
 using RPGExperiments.Spells;
-using static RPGExperiments.Spells.TestSpells;
+using static RPGExperiments.Spells.TestAttackSpells;
+using static RPGExperiments.Spells.TestHealSpells;
 
 namespace RPGExperiments.Classes
 {
@@ -65,7 +66,8 @@ namespace RPGExperiments.Classes
         new List<Weapon>(),
         new List<Armour>(),
         new List<Accessory>(),
-        new List<BaseSpell>());
+        new List<BaseSpell> { Wolf, Golem, Yeti, Fairy, Valkyrie, /* TODO: Basilisk attempts to petrify all enemies */ 
+        Dryad, Unicorn, Hydra, Phoenix, Cerberus, /* TODO: Shade attempts to instakill all enemies */ Dragon });
 
         // The geomancer channels the power of their environment to inflict damage on their enemies.
         public static BaseClass Geomancer = new BaseClass("Geomancer",

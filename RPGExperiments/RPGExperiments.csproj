@@ -56,6 +56,7 @@
     <Compile Include="Spells\HealSpell.cs" />
     <Compile Include="Classes\BaseClass.cs" />
     <Compile Include="Equipment\ArmourType.cs" />
+    <Compile Include="Entities\EnemyEntity.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

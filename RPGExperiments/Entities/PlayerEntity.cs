@@ -6,7 +6,7 @@ using RPGExperiments.Classes;
 
 namespace RPGExperiments.Entities
 {
-    public static class TestEntities
+    public static class TestPlayers
     {
         /* Player base stats should sum to between 65 and 69. */
         static byte levelBase = 50;                                                              /* STR VIT AGL INT SPR RES LCK CHR */
@@ -113,7 +113,6 @@ namespace RPGExperiments.Entities
             Weapon = weapon_;
             Armour = armour_;
             Accessory = accessory_;
-            spells = new Dictionary<BaseSpell, byte>();
         }
 
         public override DamageInfo PhysicalAttackDamage(BaseEntity defender, Random r)

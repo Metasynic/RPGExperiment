@@ -50,6 +50,7 @@ namespace RPGExperiments.Entities
         {
             name = name_;
             level = level_;
+            spells = new Dictionary<BaseSpell, byte>();
         }
 
         public abstract DamageInfo PhysicalAttackDamage(BaseEntity defender, Random r);

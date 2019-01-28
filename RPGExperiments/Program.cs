@@ -7,6 +7,24 @@ namespace RPGExperiments
 {
     public class Program
     {
+        static void printAttack(BaseEntity attacker, BaseEntity target, Random r)
+        {
+            if (attacker.Spells.Count != 0) {
+                if (r.Next(3) == 0)
+                {
+                    printPhysicalAttack(attacker, target, r);
+                }
+                else
+                {
+                    printSpell(attacker, target, r);
+                }
+            }
+            else
+            {
+                printPhysicalAttack(attacker, target, r);
+            }
+        }
+
         static void printCharacter(BaseEntity b)
         {
             Console.WriteLine(b.Name.PadRight(9) + " Lv: " + b.Level + " BST: " + (b as PlayerEntity).BaseStatTotal + " HP: " + b.MaxHealth + " MP: " + b.MaxMana + " Atk: " + b.PhysAtk + " Def: " + b.PhysDef + " BMag: " + b.BlackMag + " WMag: " + b.WhiteMag + " MDef: " + b.MagDef + " Hit: " + b.HitRate + " Spd: " + b.Speed + " Crm: " + b.Charm + " FST: " + (b.PhysAtk + b.PhysDef + b.BlackMag + b.WhiteMag + b.MagDef + b.HitRate + b.Speed + b.Charm) + " Crit: " + Math.Round(b.CritRate * 100, 1) + "%");
@@ -30,28 +48,24 @@ namespace RPGExperiments
         static void Main(string[] args)
         {
             byte spellLevel = 8;
-            TestEntities.Aqua.AddSpells(TestEntities.Aqua.CharacterClass.AllowedSpells, spellLevel);
-            TestEntities.Megumin.AddSpell(TestSpells.Explosion, spellLevel);
-            TestEntities.Yunyun.AddSpells(TestEntities.Yunyun.CharacterClass.AllowedSpells, spellLevel);
-            TestEntities.Sam.AddSpells(TestEntities.Sam.CharacterClass.AllowedSpells, spellLevel);
-            TestEntities.Lewis.AddSpells(TestEntities.Lewis.CharacterClass.AllowedSpells, spellLevel);
+            TestPlayers.Aqua.AddSpells(TestPlayers.Aqua.CharacterClass.AllowedSpells, spellLevel);
+            TestPlayers.Megumin.AddSpell(TestSpells.Explosion, spellLevel);
+            TestPlayers.Yunyun.AddSpells(TestPlayers.Yunyun.CharacterClass.AllowedSpells, spellLevel);
+            TestPlayers.Sam.AddSpells(TestPlayers.Sam.CharacterClass.AllowedSpells, spellLevel);
+            TestPlayers.Lewis.AddSpells(TestPlayers.Lewis.CharacterClass.AllowedSpells, spellLevel);
 
-            foreach (BaseEntity entity in TestEntities.Entities)
+            foreach (BaseEntity entity in TestPlayers.Entities)
             {
                 printCharacter(entity);
             }
 
             Random r = new Random();
-            for(int i = 0; i < 10; i++)
+            for(int i = 0; i < 5; i++)
             {
-                printPhysicalAttack(TestEntities.Entities[r.Next(0, TestEntities.Entities.Count)], TestEntities.Entities[r.Next(0, TestEntities.Entities.Count)], r);
+                printAttack(TestPlayers.Entities[r.Next(0, TestPlayers.Entities.Count)], TestPlayers.Entities[r.Next(0, TestPlayers.Entities.Count)], r);
+                printAttack(TestPlayers.Entities[r.Next(0, TestPlayers.Entities.Count)], TestEnemies.EvilThing, r);
+                printAttack(TestEnemies.EvilThing, TestPlayers.Entities[r.Next(0, TestPlayers.Entities.Count)], r);
             }
-
-            printSpell(TestEntities.Aqua, TestEntities.Chris, r);
-            printSpell(TestEntities.Megumin, TestEntities.Kazuma, r);
-            printSpell(TestEntities.Sam, TestEntities.Darkness, r);
-            printSpell(TestEntities.Yunyun, TestEntities.Wiz, r);
-            printSpell(TestEntities.Lewis, TestEntities.Sam, r);
 
             Console.ReadKey();
         }

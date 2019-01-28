@@ -26,7 +26,7 @@ namespace RPGExperiments.Entities
 
         public static PlayerEntity May = new PlayerEntity("May", (byte)(levelBase + 1),             6,  4,  12, 8,  5,  7,  16, 10, CharacterClasses.Thief, TestWeapons.AdamantDagger, TestArmour.LightCrystalBoundOutfit, TestAccessories.CrimsonRibbon); 
 
-        public static List<PlayerEntity> Entities = new List<PlayerEntity> { Kazuma, Aqua, Megumin, Darkness, Wiz, Yunyun, Chris, Sam, Lewis, Freddie, James, May };
+        public static List<BaseEntity> Entities = new List<BaseEntity> { Kazuma, Aqua, Megumin, Darkness, Wiz, Yunyun, Chris, Sam, Lewis, Freddie, James, May };
     }
 
     public class PlayerEntity : BaseEntity

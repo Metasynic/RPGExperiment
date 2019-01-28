@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using System.Collections.Generic;
 using RPGExperiments.Entities;
 using RPGExperiments.Spells;
 
@@ -7,30 +8,30 @@ namespace RPGExperiments
 {
     public class Program
     {
-        static void printAttack(BaseEntity attacker, BaseEntity target, Random r)
+        static void PrintAttack(BaseEntity attacker, BaseEntity target, Random r)
         {
             if (attacker.Spells.Count != 0) {
                 if (r.Next(3) == 0)
                 {
-                    printPhysicalAttack(attacker, target, r);
+                    PrintPhysicalAttack(attacker, target, r);
                 }
                 else
                 {
-                    printSpell(attacker, target, r);
+                    PrintSpell(attacker, target, r);
                 }
             }
             else
             {
-                printPhysicalAttack(attacker, target, r);
+                PrintPhysicalAttack(attacker, target, r);
             }
         }
 
-        static void printCharacter(BaseEntity b)
+        static void PrintCharacter(BaseEntity b)
         {
             Console.WriteLine(b.Name.PadRight(9) + " Lv: " + b.Level + " BST: " + (b as PlayerEntity).BaseStatTotal + " HP: " + b.MaxHealth + " MP: " + b.MaxMana + " Atk: " + b.PhysAtk + " Def: " + b.PhysDef + " BMag: " + b.BlackMag + " WMag: " + b.WhiteMag + " MDef: " + b.MagDef + " Hit: " + b.HitRate + " Spd: " + b.Speed + " Crm: " + b.Charm + " FST: " + (b.PhysAtk + b.PhysDef + b.BlackMag + b.WhiteMag + b.MagDef + b.HitRate + b.Speed + b.Charm) + " Crit: " + Math.Round(b.CritRate * 100, 1) + "%");
         }
 
-        static void printPhysicalAttack(BaseEntity attacker, BaseEntity defender, Random r)
+        static void PrintPhysicalAttack(BaseEntity attacker, BaseEntity defender, Random r)
         {
             DamageInfo damageInfo = attacker.PhysicalAttackDamage(defender, r);
             if (damageInfo.Critical)
@@ -40,9 +41,18 @@ namespace RPGExperiments
             Console.WriteLine(attacker.Name + " does " + damageInfo.Damage + " damage to " + defender.Name + ".");
         }
 
-        static void printSpell(BaseEntity attacker, BaseEntity defender, Random r) {
+        static void PrintSpell(BaseEntity attacker, BaseEntity defender, Random r) {
             BaseSpell spell = attacker.Spells.Keys.ElementAt(r.Next(0, attacker.Spells.Keys.Count));
             Console.WriteLine(attacker.Name + " cast " + spell.Name + " on " + defender.Name + " for " + attacker.CastSpell(spell, defender, r));
+        }
+
+        static void CastOnAll(BaseEntity attacker, List<BaseEntity> defenders, Random r)
+        {
+            BaseSpell spell = attacker.Spells.Keys.ElementAt(r.Next(0, attacker.Spells.Keys.Count));
+            foreach(BaseEntity defender in defenders)
+            {
+                Console.WriteLine(attacker.Name + " cast " + spell.Name + " on " + defender.Name + " for " + attacker.CastSpell(spell, defender, r));
+            }
         }
 
         static void Main(string[] args)
@@ -60,16 +70,15 @@ namespace RPGExperiments
 
             foreach (BaseEntity entity in TestPlayers.Entities)
             {
-                printCharacter(entity);
+                PrintCharacter(entity);
             }
 
             Random r = new Random();
-            for(int i = 0; i < 5; i++)
+            foreach(PlayerEntity p in TestPlayers.Entities)
             {
-                printAttack(TestPlayers.Entities[r.Next(0, TestPlayers.Entities.Count)], TestPlayers.Entities[r.Next(0, TestPlayers.Entities.Count)], r);
-                printAttack(TestPlayers.Entities[r.Next(0, TestPlayers.Entities.Count)], TestEnemies.Erlant, r);
-                printAttack(TestEnemies.Erlant, TestPlayers.Entities[r.Next(0, TestPlayers.Entities.Count)], r);
+                PrintAttack(p, TestEnemies.Erlant, r);
             }
+            CastOnAll(TestEnemies.Erlant, TestPlayers.Entities, r);
 
             Console.ReadKey();
         }

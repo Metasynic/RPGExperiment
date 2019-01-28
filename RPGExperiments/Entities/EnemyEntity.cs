@@ -6,7 +6,7 @@ namespace RPGExperiments.Entities
     public static class TestEnemies
     {
         public static EnemyEntity EvilThing = new EnemyEntity("Evil Thing", 40, 4000, 200, 500, 500, 500, 500, 500, 500, 500, 500, 1d/32d);
-        public static EnemyEntity Erlant = new EnemyEntity("Erlant", 99, 99999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 1d/16d);
+        public static EnemyEntity Erlant = new EnemyEntity("Erlant", 99, 200000, 1000, 999, 999, 999, 999, 999, 999, 999, 999, 1d/16d);
     }
 
     public class EnemyEntity : BaseEntity

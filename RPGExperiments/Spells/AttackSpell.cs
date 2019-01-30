@@ -107,7 +107,7 @@ namespace RPGExperiments.Spells
             else
                 mag = attacker.WhiteMag;
 
-            ushort rawDamage = (ushort)(mag * (spell.Power + (spellLevel / 8) * spell.Power) - defender.MagDef + r.Next(1, (ushort)(3 + Math.Log(attacker.Level) * baseLck)));
+            ushort rawDamage = (ushort)(mag * ((1 + (spellLevel / 8)) * spell.Power) * ((3000d - defender.MagDef) / 3000) + r.Next(1, (ushort)(3 + Math.Log(attacker.Level) * baseLck)));
             if (spell.BreakDamageLimit)
                 return rawDamage;
             return (ushort)Utils.Clamp(rawDamage, 1, 9999);

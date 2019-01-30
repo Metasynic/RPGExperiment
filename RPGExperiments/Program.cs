@@ -74,7 +74,11 @@ namespace RPGExperiments
             }
 
             Random r = new Random();
-            foreach(PlayerEntity p in TestPlayers.Entities)
+            for(int i = 0; i < 5; i++)
+            {
+                PrintAttack(TestPlayers.Entities[r.Next(TestPlayers.Entities.Count)], TestPlayers.Entities[r.Next(TestPlayers.Entities.Count)], r);
+            }
+            foreach (PlayerEntity p in TestPlayers.Entities)
             {
                 PrintAttack(p, TestEnemies.Erlant, r);
             }

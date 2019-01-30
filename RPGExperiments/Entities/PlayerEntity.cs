@@ -117,7 +117,7 @@ namespace RPGExperiments.Entities
 
         public override DamageInfo PhysicalAttackDamage(BaseEntity defender, Random r)
         {
-            ushort damage = (ushort)Utils.Clamp(PhysAtk * 4 - defender.PhysDef + r.Next(1, (ushort)(3 + Math.Log(level) * baseLck)), 1, 9999);
+            ushort damage = (ushort)Utils.Clamp(PhysAtk * 6 * ((3000d - defender.PhysDef) / 3000) + r.Next(1, (ushort)(3 + Math.Log(level) * baseLck)), 1, 9999);
 
             if (r.NextDouble() < CritRate)
             {

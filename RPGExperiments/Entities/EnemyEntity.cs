@@ -5,8 +5,7 @@ namespace RPGExperiments.Entities
 {
     public static class TestEnemies
     {
-        public static EnemyEntity EvilThing = new EnemyEntity("Evil Thing", 40, 4000, 200, 500, 500, 500, 500, 500, 500, 500, 500, 1d/32d);
-        public static EnemyEntity Erlant = new EnemyEntity("Erlant", 99, 200000, 1000, 999, 999, 999, 999, 999, 999, 999, 999, 1d/16d);
+        public static EnemyEntity Erlant = new EnemyEntity("Erlant", 99, 200000, 1000, 750, 800, 999, 999, 999, 700, 700, 650, 1d/16d);
     }
 
     public class EnemyEntity : BaseEntity
@@ -54,7 +53,7 @@ namespace RPGExperiments.Entities
 
         public override DamageInfo PhysicalAttackDamage(BaseEntity defender, Random r)
         {
-            ushort damage = (ushort)Utils.Clamp(PhysAtk * 6 * ((3000d - defender.PhysDef) / 3000) + r.Next(1, (ushort)(3 + Math.Log(level) * 0)), 1, 9999);
+            ushort damage = (ushort)Utils.Clamp(PhysAtk * 8 * ((3000d - defender.PhysDef) / 3000) + r.Next(1, (ushort)(3 + Math.Log(level) * 0)), 1, 9999);
 
             if (r.NextDouble() < CritRate)
             {

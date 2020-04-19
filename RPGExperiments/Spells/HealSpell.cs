@@ -28,7 +28,7 @@ namespace RPGExperiments.Spells
             power = power_;
         }
 
-        public ushort HealAmount(BaseEntity caster, BaseEntity patient, Random r, HealSpell spell, byte spellLevel, byte baseLck)
+        public ushort HealAmount(BaseEntity caster, BaseEntity patient, Random r, HealSpell spell, byte spellLevel, byte level)
         {
             ushort mag;
             if (spell.Black)
@@ -36,7 +36,7 @@ namespace RPGExperiments.Spells
             else
                 mag = caster.WhiteMag;
 
-            ushort rawHeal = (ushort)(mag * (spell.Power + (spellLevel / 8) * spell.Power) + r.Next(1, (ushort)(3 + Math.Log(caster.Level) * baseLck)));
+            ushort rawHeal = (ushort)(mag * (spell.Power + (spellLevel / 8) * spell.Power) + r.Next(1, (ushort)(10 + level * 10)));
 
             return (ushort)Utils.Clamp(rawHeal, 1, 9999);
         }

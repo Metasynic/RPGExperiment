@@ -50,38 +50,5 @@ namespace RPGExperiments.Entities
             charm = charm_;
             critRate = critRate_;
         }
-
-        public override DamageInfo PhysicalAttackDamage(BaseEntity defender, Random r)
-        {
-            ushort damage = (ushort)Utils.Clamp(PhysAtk * 8 * ((3000d - defender.PhysDef) / 3000) + r.Next(1, (ushort)(3 + Math.Log(level) * 0)), 1, 9999);
-
-            if (r.NextDouble() < CritRate)
-            {
-                /* Critical Hit */
-                return new DamageInfo((ushort)(damage * 2), true, false);
-            }
-            if (r.Next(defender.Speed) > HitRate && r.Next(2) == 0)
-            {
-                /* Glancing Hit */
-                return new DamageInfo((ushort)(damage / 2), false, true);
-            }
-            /* Normal Hit */
-            return new DamageInfo(damage, false, false);
-        }
-
-        public override ushort CastSpell(BaseSpell spell, BaseEntity target, Random r)
-        {
-            if (!spells.ContainsKey(spell))
-                throw new Exception(name + " called CastSpell() with spell " + spell.Name + ", which is not in their spell list.");
-
-            //TODO: These luck values are statically 1 and may need changing.
-
-            if (spell.GetType() == typeof(AttackSpell))
-                return ((AttackSpell)spell).AttackDamage(this, target, r, (AttackSpell)spell, spells[spell], 1);
-            if (spell.GetType() == typeof(HealSpell))
-                return ((HealSpell)spell).HealAmount(this, target, r, (HealSpell)spell, spells[spell], 1);
-
-            throw new Exception(name + " tried to cast a spell " + spell.Name + " with unknown type.");
-        }
     }
 }

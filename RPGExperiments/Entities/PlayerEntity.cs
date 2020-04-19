@@ -43,7 +43,7 @@ namespace RPGExperiments.Entities
          */
 
         /* The base stats are as follows:
-         * Strength (STR) - how strong you are, determines physical attack damage.
+         * Strength (STR) - how strong you are, determines physical attack damage and speed.
          * Vitality (VIT) - how tough and resistant to pain you are, affects health and physical defence.
          * Agility (AGL) - how fast or nimble you are, affects speed and hit rate.
          * Intelligence (INT) - how logical or clever you are, affects black magic and mana.
@@ -72,7 +72,7 @@ namespace RPGExperiments.Entities
         public ushort TotalSpeedInc { get => (ushort)(Weapon.Increase.SpeedInc + Armour.Increase.SpeedInc + Accessory.Increase.SpeedInc); }
         public ushort TotalCharmInc { get => (ushort)(Weapon.Increase.CharmInc + Armour.Increase.CharmInc + Accessory.Increase.CharmInc); }
 
-        public override int MaxHealth { get => (int)Utils.Clamp(((12 + baseVit) * level * 7 + baseLck * Math.Log(level)) * TotalHealthMult, 1, 9999); }
+        public override int MaxHealth { get => (int)Utils.Clamp(((16 + baseVit) * level * 8 + baseLck * Math.Log(level)) * TotalHealthMult, 1, 9999); }
         public override int MaxMana { get => (int)Utils.Clamp(((baseInt + baseSpt + baseRes / 2) * level / 1.5 + baseLck * Math.Log(level)) * TotalManaMult, 1, 999); }
         public override ushort PhysAtk { get => (ushort)Utils.Clamp(((baseStr + 12) * level / 2 + TotalPhysAtkInc) * PowerMultiplier, 1, 999); }
         public override ushort PhysDef { get => (ushort)Utils.Clamp(((baseVit + 12) * level / 2 + TotalPhysDefInc) * PhysDefMultiplier, 1, 999); }
@@ -87,7 +87,7 @@ namespace RPGExperiments.Entities
         public Armour Armour { get; }
         public Accessory Accessory { get; }
 
-        public override double CritRate { get => (1 + baseLck / 16d) * Weapon.WType.Crit; }
+        public override double CritRate { get => (1 + baseLck / 16d) * Weapon.WType.Crit * level / 20; }
 
         public byte BaseStatTotal { get => (byte)(baseStr + baseVit + baseAgl + baseInt + baseSpt + baseRes + baseLck + baseChr); }
 
@@ -113,37 +113,6 @@ namespace RPGExperiments.Entities
             Weapon = weapon_;
             Armour = armour_;
             Accessory = accessory_;
-        }
-
-        public override DamageInfo PhysicalAttackDamage(BaseEntity defender, Random r)
-        {
-            ushort damage = (ushort)Utils.Clamp(PhysAtk * 8 * ((3000d - defender.PhysDef) / 3000) + r.Next(1, (ushort)(3 + Math.Log(level) * baseLck)), 1, 9999);
-
-            if (r.NextDouble() < CritRate)
-            {
-                /* Critical Hit */
-                return new DamageInfo((ushort)(damage * 2), true, false);
-            }
-            if (r.Next(defender.Speed) > HitRate && r.Next(2) == 0)
-            {
-                /* Glancing Hit */
-                return new DamageInfo((ushort)(damage / 2), false, true);
-            }
-            /* Normal Hit */
-            return new DamageInfo(damage, false, false);
-        }
-
-        public override ushort CastSpell(BaseSpell spell, BaseEntity target, Random r)
-        {
-            if (!spells.ContainsKey(spell))
-                throw new Exception(name + " called CastSpell() with spell " + spell.Name + ", which is not in their spell list.");
-
-            if (spell.GetType() == typeof(AttackSpell))
-                return ((AttackSpell)spell).AttackDamage(this, target, r, (AttackSpell)spell, spells[spell], baseLck);
-            if (spell.GetType() == typeof(HealSpell))
-                return ((HealSpell)spell).HealAmount(this, target, r, (HealSpell)spell, spells[spell], baseLck);
-
-            throw new Exception(name + " tried to cast a spell " + spell.Name + " with unknown type.");
         }
     }
 }

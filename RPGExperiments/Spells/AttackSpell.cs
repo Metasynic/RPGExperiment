@@ -99,7 +99,7 @@ namespace RPGExperiments.Spells
             breakDamageLimit = breakDamageLimit_;
         }
 
-        public ushort AttackDamage(BaseEntity attacker, BaseEntity defender, Random r, AttackSpell spell, byte spellLevel, byte baseLck)
+        public ushort AttackDamage(BaseEntity attacker, BaseEntity defender, Random r, AttackSpell spell, byte spellLevel, byte level)
         {
             ushort mag;
             if (spell.Black)
@@ -107,7 +107,7 @@ namespace RPGExperiments.Spells
             else
                 mag = attacker.WhiteMag;
 
-            ushort rawDamage = (ushort)(mag * ((1 + (spellLevel / 8)) * spell.Power) * ((3000d - defender.MagDef) / 3000) + r.Next(1, (ushort)(3 + Math.Log(attacker.Level) * baseLck)));
+            ushort rawDamage = (ushort)(mag * 3 * ((1 + (spellLevel / 8)) * spell.Power) * (1500d - defender.MagDef) / 1500d + r.Next(1, (ushort)(10 + level * 10)));
             if (spell.BreakDamageLimit)
                 return rawDamage;
             return (ushort)Utils.Clamp(rawDamage, 1, 9999);

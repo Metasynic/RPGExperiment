@@ -36,8 +36,6 @@ namespace RPGExperiments
             DamageInfo damageInfo = attacker.PhysicalAttackDamage(defender, r);
             if (damageInfo.Critical)
                 Console.WriteLine("Critical Hit:");
-            else if (damageInfo.Glancing)
-                Console.WriteLine("Glancing Blow:");
             Console.WriteLine(attacker.Name + " does " + damageInfo.Damage + " damage to " + defender.Name + ".");
         }
 
